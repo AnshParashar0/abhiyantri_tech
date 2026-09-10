@@ -1,0 +1,718 @@
+/* ═══════════════════════════════════════════════════════
+   EXTEJ – WALLET  |  style.css
+   Mobile-first → progressively enhanced to large screen
+═══════════════════════════════════════════════════════ */
+
+/* ─── CSS CUSTOM PROPERTIES ─────────────────────────── */
+:root {
+  --sidebar-width: 200px;
+  --sidebar-bg: #1a1f3c;          /* deep navy */
+  --sidebar-text: #8892b0;
+  --sidebar-text-active: #fff;
+  --sidebar-active-bg: #e74c3c;
+  --sidebar-hover-bg: rgba(255,255,255,.05);
+  --sidebar-section: #515a80;
+  --sidebar-badge: #2a3060;
+
+  --topbar-bg: #ffffff;
+  --topbar-border: #eef0f8;
+  --topbar-height: 56px;
+
+  --page-bg: #f0f2fa;
+  --panel-bg: #ffffff;
+  --panel-radius: 10px;
+  --panel-shadow: 0 2px 12px rgba(30,40,90,.07);
+
+  --primary: #3b5bdb;
+  --primary-dark: #2f4abf;
+  --accent: #e74c3c;
+  --success: #22c55e;
+  --warning: #f59e0b;
+
+  --text-main: #1e2a55;
+  --text-muted: #8892b0;
+  --text-small: 0.72rem;
+
+  --amount-card-border: #dde2f0;
+  --amount-card-selected: #3b5bdb;
+  --amount-card-selected-bg: #eef1ff;
+  --amount-card-radius: 8px;
+
+  --detail-divider: #eef0f8;
+
+  --tab-active-bg: #3b5bdb;
+  --tab-active-color: #fff;
+  --tab-inactive-color: #8892b0;
+
+  font-size: 14px;
+}
+
+/* ─── RESET & BASE ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--page-bg);
+  color: var(--text-main);
+  font-size: 0.875rem;
+  min-height: 100vh;
+}
+
+/* ─── APP WRAPPER ────────────────────────────────────── */
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════════════════════════
+   SIDEBAR  (hidden on mobile → visible md+)
+══════════════════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: var(--sidebar-bg);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Offcanvas sidebar (mobile) */
+.sidebar-offcanvas {
+  width: 220px !important;
+  background: var(--sidebar-bg) !important;
+  color: var(--sidebar-text);
+}
+
+/* Brand */
+.sidebar-brand {
+  padding: 16px 14px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.brand-logo svg { display: block; }
+
+.brand-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .5px;
+}
+
+/* Section labels */
+.nav-section-label {
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--sidebar-section);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 14px 4px;
+  margin: 0;
+}
+
+/* Nav items */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  text-decoration: none;
+  color: var(--sidebar-text);
+  font-size: 0.8rem;
+  font-weight: 400;
+  transition: background .18s, color .18s;
+  border-radius: 0;
+  position: relative;
+}
+
+.nav-item:hover {
+  background: var(--sidebar-hover-bg);
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-item.active {
+  background: var(--sidebar-active-bg);
+  color: #fff;
+}
+
+.nav-icon {
+  font-size: 1rem;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-text { flex: 1; }
+
+.nav-badge {
+  background: var(--sidebar-badge);
+  color: #8892b0;
+  font-size: 0.62rem;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.nav-arrow {
+  font-size: 0.65rem;
+  color: var(--sidebar-section);
+}
+
+.nav-item.active .nav-arrow { color: rgba(255,255,255,.6); }
+
+/* ══════════════════════════════════════════════════════
+   MAIN COLUMN
+══════════════════════════════════════════════════════ */
+.main-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ──────────────────────────────────────────────────────
+   TOP NAVBAR
+────────────────────────────────────────────────────── */
+.top-navbar {
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--topbar-border);
+  height: var(--topbar-height);
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  gap: 8px;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  padding: 4px 6px;
+}
+
+.search-box {
+  background: #f5f6fc;
+  border: 1px solid #eaecf6;
+  border-radius: 20px;
+  padding: 5px 14px;
+  gap: 6px;
+  flex: 1;
+  max-width: 260px;
+}
+
+.search-icon { color: #aab0cc; font-size: .85rem; }
+
+.search-input {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: .8rem;
+  color: var(--text-main);
+  width: 100%;
+}
+
+.search-input::placeholder { color: #aab0cc; }
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.icon-btn:hover { background: #f0f2fa; }
+
+.avatar-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-img { width: 100%; height: 100%; object-fit: cover; }
+
+.user-name {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.user-role {
+  font-size: .65rem;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.flag-icon { font-size: 1.2rem; }
+
+/* ──────────────────────────────────────────────────────
+   PAGE CONTENT
+────────────────────────────────────────────────────── */
+.page-content {
+  padding: 20px 14px;
+}
+
+@media (min-width: 576px) {
+  .page-content { padding: 24px 20px; }
+}
+
+@media (min-width: 992px) {
+  .page-content { padding: 28px 28px; }
+}
+
+.page-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 14px;
+}
+
+/* ─── TABS ───────────────────────────────────────────── */
+.loan-tabs {
+  display: flex;
+  gap: 0;
+  background: #f0f2fa;
+  border-radius: 6px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 7px 18px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .6px;
+  color: var(--tab-inactive-color);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  border-radius: 6px;
+}
+
+.tab-btn.active {
+  background: var(--tab-active-bg);
+  color: var(--tab-active-color);
+}
+
+/* ─── PANEL CARD ─────────────────────────────────────── */
+.panel-card {
+  background: var(--panel-bg);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--panel-shadow);
+  padding: 18px;
+}
+
+.panel-label {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+/* ─── CURRENCY SELECT ────────────────────────────────── */
+.currency-select-wrap { max-width: 100%; }
+
+.currency-select {
+  border: 1px solid #dde2f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.currency-dot {
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle, #4a90d9 0%, #1a4fa8 100%);
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.currency-text {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ─── AMOUNT CARDS GRID ──────────────────────────────── */
+.amount-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.amount-card {
+  border: 1px solid var(--amount-card-border);
+  border-radius: var(--amount-card-radius);
+  padding: 28px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+  background: #fff;
+}
+
+.amount-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(59,91,219,.12);
+}
+
+.amount-card.selected {
+  border: 2px solid var(--amount-card-selected);
+  background: var(--amount-card-selected-bg);
+  box-shadow: 0 0 0 3px rgba(59,91,219,.15);
+}
+
+.amount-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.amount-card.selected .amount-value { color: var(--primary); }
+
+/* ─── COLLATERAL ─────────────────────────────────────── */
+.collateral-label {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.balance-label {
+  font-size: .72rem;
+  color: var(--success);
+  font-weight: 500;
+}
+
+.collateral-select-wrap { max-width: 100%; }
+
+.collateral-select {
+  border: 1px solid #dde2f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.btc-icon {
+  font-size: 1rem;
+  color: #f7931a;
+  font-weight: 700;
+}
+
+.collateral-value {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ─── ACTION BUTTONS ─────────────────────────────────── */
+.btn-zero-risk {
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: .78rem;
+  padding: 9px 12px;
+  border-radius: 7px;
+}
+
+.btn-zero-risk:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-get-loan {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: .78rem;
+  padding: 9px 12px;
+  border-radius: 7px;
+}
+
+.btn-get-loan:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+/* ─── LOAN DETAILS PANEL ─────────────────────────────── */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  gap: 6px;
+}
+
+.detail-label {
+  font-size: .72rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.detail-value {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.detail-value.highlight {
+  color: var(--primary);
+  font-size: .8rem;
+}
+
+.detail-divider {
+  margin: 8px 0;
+  border-color: var(--detail-divider);
+}
+
+/* ─── WATCH A DEMO CARD ──────────────────────────────── */
+.demo-card { }
+
+.demo-title {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.demo-thumb {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.demo-thumbnail {
+  width: 100%;
+  padding-top: 56.25%;          /* 16:9 aspect */
+  position: relative;
+  background: linear-gradient(135deg, #1a1f3c 0%, #2d3561 50%, #e74c3c 100%);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.play-btn-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-btn {
+  width: 44px;
+  height: 44px;
+  background: #e74c3c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 16px rgba(231,76,60,.5);
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.play-btn:hover { transform: scale(1.1); }
+
+.demo-desc {
+  font-size: .72rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
+.demo-quick {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.demo-link {
+  font-size: .72rem;
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.demo-link:hover { text-decoration: underline; }
+
+.more-info-link {
+  font-size: .72rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.more-info-link:hover { text-decoration: underline; }
+
+/* ─── YOUR LOANS TABLE ───────────────────────────────── */
+.section-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.loans-table {
+  font-size: .72rem;
+}
+
+.loans-table thead th {
+  background: #f8f9ff;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: .68rem;
+  border-bottom: 1px solid #eef0f8;
+  white-space: nowrap;
+  padding: 8px 10px;
+  vertical-align: middle;
+}
+
+.loans-table tbody td {
+  border-bottom: 1px solid #f4f5fc;
+  padding: 10px 10px;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: var(--text-main);
+}
+
+.sort-icon {
+  font-size: .6rem;
+  color: #bbc2d8;
+  margin-left: 2px;
+}
+
+.loan-id {
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--text-main);
+  display: block;
+}
+
+.loan-tag {
+  font-size: .62rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.status-dot.green { background: var(--success); }
+.status-dot.yellow { background: var(--warning); }
+
+.btn-details {
+  background: #f0f2fa;
+  border: 1px solid #dde2f0;
+  color: var(--text-main);
+  font-size: .65rem;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 3px 9px;
+}
+
+.btn-repay {
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 3px 9px;
+}
+
+.btn-repay:hover { background: var(--primary-dark); }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+══════════════════════════════════════════════════════ */
+
+/* ── sm (≥576px) ── */
+@media (min-width: 576px) {
+  .top-navbar { padding: 0 20px; height: 60px; }
+  .page-title  { font-size: 1.55rem; }
+  .tab-btn     { font-size: .76rem; padding: 8px 22px; }
+}
+
+/* ── md (≥768px): sidebar appears ── */
+@media (min-width: 768px) {
+  .sidebar {
+    padding-top: 0;
+  }
+
+  .page-content { padding: 28px 24px; }
+  .panel-card   { padding: 22px 20px; }
+
+  .amount-card  { padding: 32px 16px; }
+  .amount-value { font-size: 1.5rem; }
+
+  .detail-label { font-size: .74rem; }
+  .detail-value { font-size: .77rem; }
+}
+
+/* ── lg (≥992px) ── */
+@media (min-width: 992px) {
+  .page-content { padding: 30px 30px; }
+
+  /* row now has loan-details on same row as "I need a loan" */
+  .amount-grid  { gap: 14px; }
+  .amount-card  { padding: 36px 20px; }
+  .amount-value { font-size: 1.6rem; }
+}
+
+/* ── xl (≥1200px): full desktop layout ── */
+@media (min-width: 1200px) {
+  :root { --topbar-height: 62px; }
+
+  .page-content { padding: 32px 32px; }
+  .panel-card   { padding: 24px 22px; }
+
+  .amount-card  { padding: 38px 22px; }
+  .amount-value { font-size: 1.65rem; }
+}
+
+/* ── xxl (≥1400px) ── */
+@media (min-width: 1400px) {
+  :root { --sidebar-width: 215px; }
+}
+
+/* ──────────────────────────────────────────────────────
+   SCROLLBAR (sidebar)
+────────────────────────────────────────────────────── */
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
+
+/* ──────────────────────────────────────────────────────
+   UTILITY
+────────────────────────────────────────────────────── */
+.text-success { color: var(--success) !important; }
+.text-warning { color: var(--warning) !important; }
