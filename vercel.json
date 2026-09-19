@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/assignments/assign2/index.html" },
+    { "source": "/style.css", "destination": "/assignments/assign2/style.css" },
+    { "source": "/app.js", "destination": "/assignments/assign2/app.js" },
+    { "source": "/api/:path*", "destination": "/assignments/assign2/api/:path*" }
+  ]
+}

@@ -3,460 +3,343 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Extej – Wallet</title>
-
-  <!-- Bootstrap 5 -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-  />
-  <!-- Bootstrap Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-  />
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
+  <title>Extej - Wallet</title>
+  <meta name="description" content="Extej crypto wallet - get zero-interest Bitcoin-backed loans, manage collateral, and track your loan portfolio." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     MOBILE OFFCANVAS SIDEBAR (xs / sm)
-═══════════════════════════════════════════ -->
-<div class="offcanvas offcanvas-start sidebar-offcanvas" tabindex="-1" id="mobileSidebar">
-  <div class="offcanvas-header border-0 pb-0">
-    <div class="brand d-flex align-items-center gap-2">
-      <div class="brand-logo">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <polygon points="15,2 28,26 2,26" fill="#e74c3c"/>
-          <polygon points="15,8 24,26 6,26" fill="#c0392b" opacity=".6"/>
-        </svg>
-      </div>
-      <span class="brand-name">Extej</span>
-    </div>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+<div class="panel-backdrop" id="panelBackdrop"></div>
+
+<div class="notif-panel" id="notifPanel">
+  <div class="notif-panel-header">
+    <span class="notif-panel-title">Notifications</span>
+    <button class="notif-clear-btn" id="markAllReadBtn" type="button">Mark all read</button>
   </div>
-  <div class="offcanvas-body p-0">
-    <!-- reuse same sidebar nav -->
-    <div id="sidebarNavMobile"></div>
+  <div class="notif-list" id="notifList">
+    <div style="padding:20px;text-align:center;color:#94A3B8;font-size:.78rem;">Loading...</div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     MAIN LAYOUT WRAPPER
-═══════════════════════════════════════════ -->
-<div class="app-wrapper">
+<div class="settings-panel" id="settingsPanel">
+  <div class="settings-panel-header">
+    <span class="settings-panel-title">Settings</span>
+    <button class="icon-btn" id="settingsPanelClose" type="button"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="settings-body">
+    <div class="settings-item">
+      <div><div class="settings-item-label">Dark Mode</div><div class="settings-item-sub">Use dark theme</div></div>
+      <label class="toggle"><input type="checkbox" id="darkModeToggle" /><span class="toggle-slider"></span></label>
+    </div>
+    <div class="settings-item">
+      <div><div class="settings-item-label">Notifications</div><div class="settings-item-sub">Push and email alerts</div></div>
+      <label class="toggle"><input type="checkbox" id="notifToggle" checked /><span class="toggle-slider"></span></label>
+    </div>
+    <div class="settings-item">
+      <div><div class="settings-item-label">2-Factor Auth</div><div class="settings-item-sub">Currently enabled</div></div>
+      <label class="toggle"><input type="checkbox" id="twoFaToggle" checked /><span class="toggle-slider"></span></label>
+    </div>
+    <div class="settings-item" style="border-top:1px solid #F1F5F9;margin-top:4px;padding-top:14px;">
+      <div><div class="settings-item-label">Language</div><div class="settings-item-sub" id="langLabel">English (GB)</div></div>
+      <i class="bi bi-chevron-right" style="color:#94A3B8;font-size:.8rem;"></i>
+    </div>
+  </div>
+</div>
 
-  <!-- ─── SIDEBAR (md+) ─── -->
-  <aside class="sidebar d-none d-md-flex flex-column">
+<!-- Profile Panel (slide-in) -->
+<div class="profile-panel" id="profilePanel">
+  <div class="profile-panel-header">
+    <span class="profile-panel-title">My Profile</span>
+    <button class="icon-btn" id="profilePanelClose" type="button" aria-label="Close profile"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="profile-panel-body">
+    <div class="profile-avatar-wrap">
+      <img id="profileAvatar" src="https://ui-avatars.com/api/?name=Austin+Robertson&background=4F46E5&color=fff&size=80" alt="User Avatar" class="profile-avatar-img" />
+    </div>
+    <div class="profile-name" id="profileName">Austin Robertson</div>
+    <div class="profile-role" id="profileRole">Marketing Administrator</div>
+    <div class="profile-email" id="profileEmail">austin.robertson@extej.io</div>
+    <hr class="profile-divider" />
+    <button class="profile-logout-btn" id="profileLogoutBtn" type="button">
+      <i class="bi bi-box-arrow-right"></i> Log Out
+    </button>
+  </div>
+</div>
 
-    <!-- Brand -->
-    <div class="sidebar-brand d-flex align-items-center gap-2">
-      <div class="brand-logo">
-        <svg width="32" height="32" viewBox="0 0 30 30" fill="none">
-          <polygon points="15,2 28,26 2,26" fill="#e74c3c"/>
-          <polygon points="15,8 24,26 6,26" fill="#c0392b" opacity=".6"/>
-        </svg>
+<div class="modal-overlay" id="loanModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="loanModalClose" type="button"><i class="bi bi-x-lg"></i></button>
+    <div class="modal-step active" id="loanStep1">
+      <div class="modal-icon indigo"><i class="bi bi-file-earmark-text"></i></div>
+      <h2 class="modal-title">Review Your Loan</h2>
+      <p class="modal-subtitle">Please confirm the details before we process your loan.</p>
+      <div class="modal-summary">
+        <div class="modal-summary-row"><span class="modal-summary-label">Loan Amount</span><span class="modal-summary-value accent" id="reviewAmount">-</span></div>
+        <div class="modal-summary-row"><span class="modal-summary-label">Currency</span><span class="modal-summary-value" id="reviewCurrency">EUR</span></div>
+        <hr class="modal-divider" />
+        <div class="modal-summary-row"><span class="modal-summary-label">Collateral (BTC)</span><span class="modal-summary-value" id="reviewCollateral">-</span></div>
+        <div class="modal-summary-row"><span class="modal-summary-label">Loan-to-Value</span><span class="modal-summary-value" id="reviewLtv">50%</span></div>
+        <hr class="modal-divider" />
+        <div class="modal-summary-row"><span class="modal-summary-label">Interest Rate</span><span class="modal-summary-value" style="color:#059669;">0%</span></div>
+        <div class="modal-summary-row"><span class="modal-summary-label">Term</span><span class="modal-summary-value">3 months</span></div>
+        <div class="modal-summary-row"><span class="modal-summary-label">Monthly Payment</span><span class="modal-summary-value" id="reviewMonthly">-</span></div>
+        <div class="modal-summary-row"><span class="modal-summary-label">Origination Fee</span><span class="modal-summary-value">2.5%</span></div>
       </div>
+      <button class="modal-btn-primary" id="confirmLoanBtn" type="button">Confirm &amp; Apply</button>
+      <button class="modal-btn-secondary" id="loanModalCancel" type="button">Cancel</button>
+    </div>
+    <div class="modal-step" id="loanStep2">
+      <div class="processing-wrap">
+        <div class="big-spinner"></div>
+        <h2 class="modal-title">Processing...</h2>
+        <p class="modal-subtitle">Submitting your loan application. This usually takes a few seconds.</p>
+      </div>
+    </div>
+    <div class="modal-step" id="loanStep3">
+      <div class="modal-icon success"><i class="bi bi-check-lg"></i></div>
+      <h2 class="modal-title">Loan Approved!</h2>
+      <p class="modal-subtitle">Your funds will appear in your wallet within 2 minutes.</p>
+      <div class="success-id" id="successLoanId">Loan ID: -</div>
+      <button class="modal-btn-primary" id="loanSuccessDone" type="button">Done</button>
+    </div>
+    <div class="modal-step" id="loanStep4">
+      <div class="modal-icon warning"><i class="bi bi-exclamation-triangle"></i></div>
+      <h2 class="modal-title">Something went wrong</h2>
+      <p class="modal-subtitle" id="loanErrorMsg">Temporary service error. Please try again.</p>
+      <button class="modal-btn-primary" id="loanRetryBtn" type="button">Try Again</button>
+      <button class="modal-btn-secondary" id="loanErrorClose" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="zeroRiskModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="zeroRiskClose" type="button"><i class="bi bi-x-lg"></i></button>
+    <div class="modal-icon indigo"><i class="bi bi-shield-check"></i></div>
+    <h2 class="modal-title">Zero Risk Loans</h2>
+    <p class="modal-subtitle">Get a loan with <strong>0% interest</strong> at 50% LTV.</p>
+    <ul class="zero-risk-list">
+      <li><span class="zi">&#9989;</span><span><strong>0% interest</strong> for the full 3-month term.</span></li>
+      <li><span class="zi">&#128274;</span><span><strong>SmartVaults</strong> automatically manage crypto volatility.</span></li>
+      <li><span class="zi">&#9889;</span><span><strong>Early repayment</strong> is always free.</span></li>
+      <li><span class="zi">&#8383;</span><span>Your BTC <strong>stays in custody</strong> with full audit trail.</span></li>
+    </ul>
+    <button class="modal-btn-primary" id="applyZeroRiskBtn" type="button">Apply With These Terms</button>
+    <button class="modal-btn-secondary" id="zeroRiskDismiss" type="button">Maybe Later</button>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="offcanvas offcanvas-start sidebar-offcanvas" tabindex="-1" id="mobileSidebar">
+  <div class="offcanvas-header border-0 pb-0">
+    <div class="brand d-flex align-items-center gap-2">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><polygon points="15,2 28,26 2,26" fill="#2563EB"/><polygon points="15,8 24,26 6,26" fill="#1D4ED8" opacity=".7"/></svg>
       <span class="brand-name">Extej</span>
     </div>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body p-0"><div id="sidebarNavMobile"></div></div>
+</div>
 
-    <!-- Nav -->
-    <nav class="sidebar-nav flex-grow-1 overflow-auto">
-
+<div class="app-wrapper">
+  <aside class="sidebar d-none d-md-flex flex-column">
+    <div class="sidebar-brand d-flex align-items-center gap-2">
+      <svg width="32" height="32" viewBox="0 0 30 30" fill="none"><polygon points="15,2 28,26 2,26" fill="#2563EB"/><polygon points="15,8 24,26 6,26" fill="#1D4ED8" opacity=".7"/></svg>
+      <span class="brand-name">Extej</span>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav">
       <p class="nav-section-label">PAGES</p>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-bar-chart-line"></i></span>
-        <span class="nav-text">Markets</span>
-        <span class="nav-badge">1</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-arrow-left-right"></i></span>
-        <span class="nav-text">Trading</span>
-        <span class="nav-badge">1</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <a href="#" class="nav-item active">
-        <span class="nav-icon"><i class="bi bi-wallet2"></i></span>
-        <span class="nav-text">Wallet</span>
-        <span class="nav-badge">1</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-currency-dollar"></i></span>
-        <span class="nav-text">Loans</span>
-        <span class="nav-badge">1</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-safe2"></i></span>
-        <span class="nav-text">Vaults</span>
-        <span class="nav-badge">1</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-briefcase"></i></span>
-        <span class="nav-text">Portfolio</span>
-        <span class="nav-badge">1</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-droplet-half"></i></span>
-        <span class="nav-text">Liquidity pools</span>
-        <span class="nav-badge">1</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-arrow-repeat"></i></span>
-        <span class="nav-text">Swap</span>
-        <span class="nav-badge">1</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <p class="nav-section-label mt-3">ELEMENTS</p>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-grid"></i></span>
-        <span class="nav-text">Menu Styles</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-table"></i></span>
-        <span class="nav-text">Tables</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-bar-chart"></i></span>
-        <span class="nav-text">Charts</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-ui-checks"></i></span>
-        <span class="nav-text">Forms</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-tag"></i></span>
-        <span class="nav-text">Pricing</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-gear"></i></span>
-        <span class="nav-text">Settings</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-window-stack"></i></span>
-        <span class="nav-text">Modals/Pop-Ups</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
-      <p class="nav-section-label mt-3">DOCUMENTATION &amp; SUPPORT</p>
-
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-file-text"></i></span>
-        <span class="nav-text">Documentation</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="nav-icon"><i class="bi bi-life-preserver"></i></span>
-        <span class="nav-text">Support</span>
-        <i class="bi bi-chevron-right nav-arrow"></i>
-      </a>
-
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-bar-chart-line"></i></span><span class="nav-text">Markets</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-arrow-left-right"></i></span><span class="nav-text">Trading</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item active" id="nav-wallet"><span class="nav-icon"><i class="bi bi-wallet2"></i></span><span class="nav-text">Wallet</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-currency-dollar"></i></span><span class="nav-text">Loans</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-safe2"></i></span><span class="nav-text">Vaults</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-briefcase"></i></span><span class="nav-text">Portfolio</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-droplet-half"></i></span><span class="nav-text">Liquidity Pools</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-arrow-repeat"></i></span><span class="nav-text">Swap</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <p class="nav-section-label mt-1">ELEMENTS</p>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-grid"></i></span><span class="nav-text">Menu Styles</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-table"></i></span><span class="nav-text">Tables</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-bar-chart"></i></span><span class="nav-text">Charts</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-ui-checks"></i></span><span class="nav-text">Forms</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-tag"></i></span><span class="nav-text">Pricing</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-gear"></i></span><span class="nav-text">Settings</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-window-stack"></i></span><span class="nav-text">Modals</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <p class="nav-section-label mt-1">DOCUMENTATION</p>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-file-text"></i></span><span class="nav-text">Documentation</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-life-preserver"></i></span><span class="nav-text">Support</span><i class="bi bi-chevron-right nav-arrow"></i></a>
     </nav>
   </aside>
 
-  <!-- ─── MAIN COLUMN ─── -->
   <div class="main-column d-flex flex-column">
-
-    <!-- ─── TOP NAVBAR ─── -->
     <header class="top-navbar d-flex align-items-center">
-
-      <!-- Mobile hamburger -->
-      <button
-        class="btn hamburger-btn d-md-none me-2"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#mobileSidebar"
-      >
-        <i class="bi bi-list fs-4"></i>
-      </button>
-
-      <!-- Search -->
+      <button class="btn hamburger-btn d-md-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar"><i class="bi bi-list fs-4"></i></button>
       <div class="search-box d-flex align-items-center">
         <i class="bi bi-search search-icon"></i>
-        <input type="text" class="search-input" placeholder="Search" />
+        <input type="text" class="search-input" placeholder="Search markets, loans..." id="globalSearch" />
       </div>
-
       <div class="ms-auto d-flex align-items-center gap-2 gap-md-3">
-        <!-- Notification bell -->
-        <button class="icon-btn d-none d-sm-flex">
-          <i class="bi bi-bell"></i>
+        <button class="icon-btn d-none d-sm-flex" id="notifBtn" type="button" aria-label="Notifications">
+          <i class="bi bi-bell"></i><span class="notif-badge" id="notifBadge">2</span>
         </button>
-        <!-- Filter -->
-        <button class="icon-btn d-none d-sm-flex">
-          <i class="bi bi-funnel"></i>
-        </button>
-        <!-- Avatar -->
-        <div class="user-info d-flex align-items-center gap-2">
-          <div class="avatar-wrap">
-            <img
-              src="https://ui-avatars.com/api/?name=Austin+Robertson&background=e74c3c&color=fff&size=36"
-              alt="Austin Robertson"
-              class="avatar-img"
-            />
-          </div>
-          <div class="d-none d-lg-block">
-            <div class="user-name">Austin Robertson</div>
-            <div class="user-role">Marketing Administrator</div>
+        <div class="dropdown-wrap position-relative">
+          <button class="icon-btn d-none d-sm-flex" id="filterBtn" type="button" aria-label="Filter loans">
+            <i class="bi bi-funnel"></i>
+          </button>
+          <div class="filter-dropdown-menu" id="filterDropdownMenu">
+            <div class="filter-dropdown-header">Filter Loans</div>
+            <button class="filter-dropdown-item active" data-filter="all" type="button"><i class="bi bi-check2 me-2"></i>All Loans</button>
+            <button class="filter-dropdown-item" data-filter="active" type="button"><i class="bi bi-circle-fill text-success me-2" style="font-size:7px;"></i>Active Only</button>
+            <button class="filter-dropdown-item" data-filter="warning" type="button"><i class="bi bi-circle-fill text-warning me-2" style="font-size:7px;"></i>Warning / At Risk</button>
           </div>
         </div>
-        <!-- Flag -->
-        <span class="flag-icon d-none d-sm-flex">🇬🇧</span>
+        <button class="icon-btn d-none d-sm-flex" id="settingsBtn" type="button" aria-label="Settings">
+          <i class="bi bi-gear"></i>
+        </button>
+        <div class="user-info d-flex align-items-center gap-2" id="profileBtn" role="button" tabindex="0" aria-label="Open profile" style="cursor:pointer;">
+          <div class="avatar-wrap">
+            <img src="https://ui-avatars.com/api/?name=Austin+Robertson&background=2563EB&color=fff&size=36" alt="Austin Robertson" class="avatar-img" id="userAvatar" />
+          </div>
+          <div class="d-none d-lg-block">
+            <div class="user-name" id="userName">Austin Robertson</div>
+            <div class="user-role" id="userRole">Marketing Administrator</div>
+          </div>
+        </div>
+        <span class="flag-icon d-none d-sm-flex">&#127468;&#127463;</span>
       </div>
     </header>
 
-    <!-- ─── PAGE CONTENT ─── -->
-    <main class="page-content flex-grow-1">
-
-      <!-- Page heading -->
+    <main class="page-content">
       <h1 class="page-title">Wallet</h1>
-
-      <!-- Tabs -->
-      <div class="loan-tabs mb-4">
-        <button class="tab-btn" id="flexLoanTab">FLEXIBLE LOAN</button>
-        <button class="tab-btn active" id="quickLoanTab">QUICK LOAN</button>
+      <div class="loan-tabs">
+        <button class="tab-btn" id="flexLoanTab" type="button">FLEXIBLE LOAN</button>
+        <button class="tab-btn active" id="quickLoanTab" type="button">QUICK LOAN</button>
       </div>
 
-      <!-- ═══ MAIN GRID: left panel + right demo card ═══ -->
       <div class="row g-3 g-lg-4">
-
-        <!-- LEFT / CENTRE PANEL -->
         <div class="col-12 col-xl-8">
-
-          <!-- I Need A Loan In -->
           <div class="panel-card mb-3">
-            <p class="panel-label mb-2">I Need A Loan In</p>
-
-            <!-- Currency selector -->
-            <div class="currency-select-wrap mb-3">
-              <div class="currency-select d-flex align-items-center gap-2">
-                <span class="currency-dot"></span>
-                <span class="currency-text">EUR</span>
-                <i class="bi bi-chevron-down ms-auto"></i>
+            <p class="panel-label">I Need A Loan In</p>
+            <div class="currency-dropdown-wrap">
+              <button class="currency-select-btn" id="currencySelectBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+                <span class="currency-flag" id="selectedCurrencyFlag">&#127466;&#127482;</span>
+                <span class="currency-code" id="selectedCurrencyCode">EUR</span>
+                <span class="currency-name" id="selectedCurrencyName">Euro</span>
+                <i class="bi bi-chevron-down currency-chevron"></i>
+              </button>
+              <div class="currency-dropdown-menu" id="currencyDropdownMenu" role="listbox"></div>
+            </div>
+            <div class="amount-grid" id="amountGrid">
+              <div class="amount-card" style="grid-column:1/-1;justify-content:center;min-height:80px;">
+                <span class="skeleton" style="width:80px;height:20px;"></span>
               </div>
             </div>
-
-            <!-- Amount cards grid -->
-            <div class="amount-grid">
-              <div class="amount-card">
-                <span class="amount-value">50 €</span>
-              </div>
-              <div class="amount-card selected">
-                <span class="amount-value">100 €</span>
-              </div>
-              <div class="amount-card">
-                <span class="amount-value">250 €</span>
-              </div>
-              <div class="amount-card">
-                <span class="amount-value">500 €</span>
-              </div>
+            <div class="custom-amount-input-wrap" id="customAmountWrap">
+              <input type="number" class="custom-amount-field" id="customAmountInput" placeholder="Enter custom amount (e.g. 750)" min="10" max="50000" step="10" />
             </div>
-
-            <!-- Collateral -->
-            <div class="collateral-row d-flex align-items-center justify-content-between mt-3">
-              <span class="collateral-label">Collateral</span>
-              <span class="balance-label">Balance: 0 B</span>
+            <div class="collateral-header">
+              <span class="collateral-label">Collateral (BTC)</span>
+              <span class="collateral-balance" id="collateralBalance">Balance: 0.25 BTC</span>
             </div>
-            <div class="collateral-select-wrap mt-2">
-              <div class="collateral-select d-flex align-items-center gap-2">
-                <span class="btc-icon">₿</span>
-                <span class="collateral-value">0.008293</span>
-                <i class="bi bi-chevron-down ms-auto"></i>
+            <div class="collateral-input-wrap">
+              <div class="btc-pill"><span class="btc-symbol">&#8383;</span><span>BTC</span></div>
+              <input type="number" class="collateral-number-input" id="collateralInput" placeholder="0.000000" min="0" step="0.000001" />
+              <span class="ltv-badge safe" id="ltvBadge">LTV 50%</span>
+            </div>
+            <div class="ltv-bar-wrap">
+              <div class="ltv-bar-labels">
+                <span class="ltv-bar-label">Loan-to-Value</span>
+                <span class="ltv-bar-value" id="ltvBarValue">50%</span>
               </div>
+              <div class="ltv-track"><div class="ltv-fill" id="ltvFill" style="width:50%;"></div></div>
             </div>
-
-            <!-- Action Buttons -->
-            <div class="action-btns d-flex gap-2 mt-3">
-              <button class="btn btn-outline-primary flex-fill btn-zero-risk">Zero Risk Loans</button>
-              <button class="btn btn-primary flex-fill btn-get-loan">Get A Loan</button>
+            <div class="action-btns">
+              <button class="btn-zero-risk" id="zeroRiskBtn" type="button"><i class="bi bi-shield-check me-1"></i>Zero Risk Loans</button>
+              <button class="btn-get-loan" id="getLoanBtn" type="button">Get A Loan <i class="bi bi-arrow-right ms-1"></i></button>
             </div>
           </div>
 
-          <!-- YOUR LOANS TABLE -->
           <div class="panel-card">
-            <h2 class="section-title mb-3">Your Loans</h2>
+            <div class="section-header">
+              <h2 class="section-title">Your Loans</h2>
+              <span class="table-meta" id="loansTableMeta">Loading...</span>
+            </div>
             <div class="table-responsive">
-              <table class="table loans-table mb-0">
+              <table class="loans-table" id="loansTable">
                 <thead>
                   <tr>
-                    <th>Loan # <i class="bi bi-arrow-down-up sort-icon"></i></th>
-                    <th>24 <i class="bi bi-arrow-down-up sort-icon"></i></th>
-                    <th>Remain loan <i class="bi bi-arrow-down-up sort-icon"></i></th>
-                    <th>Collateral <i class="bi bi-arrow-down-up sort-icon"></i></th>
-                    <th>Loan maturity date <i class="bi bi-arrow-down-up sort-icon"></i></th>
-                    <th>Loan Term <i class="bi bi-arrow-down-up sort-icon"></i></th>
-                    <th>Loan Term <i class="bi bi-arrow-down-up sort-icon"></i></th>
-                    <th>Amount <i class="bi bi-arrow-down-up sort-icon"></i></th>
-                    <th></th>
+                    <th>Loan # <i class="bi bi-arrow-down-up sort-icon" data-col="id"></i></th>
+                    <th>Status <i class="bi bi-arrow-down-up sort-icon" data-col="status"></i></th>
+                    <th>Remaining <i class="bi bi-arrow-down-up sort-icon" data-col="remainingLoan"></i></th>
+                    <th>Collateral <i class="bi bi-arrow-down-up sort-icon" data-col="collateral"></i></th>
+                    <th>Maturity <i class="bi bi-arrow-down-up sort-icon" data-col="maturityDate"></i></th>
+                    <th>Term <i class="bi bi-arrow-down-up sort-icon" data-col="term"></i></th>
+                    <th>LTV <i class="bi bi-arrow-down-up sort-icon" data-col="ltv"></i></th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <span class="loan-id">103656298785</span>
-                      <span class="loan-tag">#100</span>
-                    </td>
-                    <td><span class="status-dot green"></span></td>
-                    <td class="text-success">€1,737.38</td>
-                    <td>1 BTC / € 20.93814</td>
-                    <td>03/17/24</td>
-                    <td>12 month</td>
-                    <td>12 month</td>
-                    <td></td>
-                    <td class="text-end">
-                      <button class="btn btn-sm btn-details me-1">Details</button>
-                      <button class="btn btn-sm btn-repay">Repay</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span class="loan-id">5.904912</span>
-                      <span class="loan-tag">#2215</span>
-                    </td>
-                    <td><span class="status-dot yellow"></span></td>
-                    <td class="text-warning">€ 25,029.18</td>
-                    <td>1 BTC / € 20.93814</td>
-                    <td>03/17/24</td>
-                    <td>3 month</td>
-                    <td>3 month</td>
-                    <td></td>
-                    <td class="text-end">
-                      <button class="btn btn-sm btn-details me-1">Details</button>
-                      <button class="btn btn-sm btn-repay">Repay</button>
-                    </td>
-                  </tr>
+                <tbody id="loansTableBody">
+                  <tr><td colspan="8" class="table-empty"><i class="bi bi-hourglass-split"></i><p>Loading your loans...</p></td></tr>
                 </tbody>
               </table>
             </div>
           </div>
+        </div>
 
-        </div><!-- /col left -->
-
-        <!-- RIGHT PANEL -->
         <div class="col-12 col-xl-4">
-
-          <!-- Loan Details -->
           <div class="panel-card mb-3">
-            <div class="loan-details-header d-flex align-items-center justify-content-between mb-3">
-              <span></span>
-              <button class="icon-btn"><i class="bi bi-gear-fill text-muted"></i></button>
+            <div class="panel-header-row">
+              <span class="panel-header-title">Loan Summary</span>
+              <button class="icon-btn" id="summarySettingsBtn" type="button"><i class="bi bi-gear-fill" style="color:#94A3B8;font-size:.9rem;"></i></button>
             </div>
-
-            <div class="detail-row">
-              <span class="detail-label">Total Loan Repayment</span>
-              <span class="detail-value highlight">● 100.0€</span>
-            </div>
+            <div class="detail-row"><span class="detail-label">Total Loan Repayment</span><span class="detail-value highlight" id="sumTotalRepayment">&#9679; -</span></div>
             <hr class="detail-divider" />
-            <div class="detail-row">
-              <span class="detail-label">Interest Rate</span>
-              <span class="detail-value">0%</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Loan-To-Value</span>
-              <span class="detail-value">50%</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Loan Term</span>
-              <span class="detail-value">3 months</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Collateral Account &amp; Type</span>
-              <span class="detail-value">0.008293 B</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Loan Exchange rate</span>
-              <span class="detail-value">24117.08 €</span>
-            </div>
+            <div class="detail-row"><span class="detail-label">Interest Rate</span><span class="detail-value" id="sumInterestRate" style="color:#059669;">0%</span></div>
+            <div class="detail-row"><span class="detail-label">Loan-to-Value</span><span class="detail-value" id="sumLtv">50%</span></div>
+            <div class="detail-row"><span class="detail-label">Loan Term</span><span class="detail-value" id="sumLoanTerm">3 months</span></div>
+            <div class="detail-row"><span class="detail-label">Collateral (BTC)</span><span class="detail-value" id="sumCollateral">-</span></div>
+            <div class="detail-row"><span class="detail-label">BTC / <span id="sumCurrencyLabel">EUR</span> Rate</span><span class="detail-value" id="sumExchangeRate">24,117.08</span></div>
             <hr class="detail-divider" />
-            <div class="detail-row">
-              <span class="detail-label">Loan Origination Fee</span>
-              <span class="detail-value">2.5%</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Early Repayment Option</span>
-              <span class="detail-value">Free</span>
-            </div>
+            <div class="detail-row"><span class="detail-label">Origination Fee</span><span class="detail-value" id="sumOriginationFee">2.5%</span></div>
+            <div class="detail-row"><span class="detail-label">Early Repayment Option</span><span class="detail-value" style="color:#059669;">Free</span></div>
             <hr class="detail-divider" />
-            <div class="detail-row">
-              <span class="detail-label">Loan Amount</span>
-              <span class="detail-value">100.00 €</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Total cost of loan (total interest)</span>
-              <span class="detail-value">0.00 €</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Monthly Payment</span>
-              <span class="detail-value">33.34 €</span>
-            </div>
+            <div class="detail-row"><span class="detail-label">Loan Amount</span><span class="detail-value" id="sumLoanAmount">-</span></div>
+            <div class="detail-row"><span class="detail-label">Total Cost of Loan (Interest)</span><span class="detail-value" id="sumTotalInterest">0.00</span></div>
+            <div class="detail-row"><span class="detail-label">Monthly Payment</span><span class="detail-value" id="sumMonthlyPayment">-</span></div>
           </div>
 
-          <!-- Watch A Demo Card -->
           <div class="panel-card demo-card">
             <h3 class="demo-title">Watch a demo:</h3>
-            <div class="demo-thumb mb-3">
-              <div class="demo-thumbnail">
+            <div class="video-wrapper" id="videoWrapper">
+              <div class="video-thumb" id="videoThumb">
                 <div class="play-btn-wrap">
-                  <div class="play-btn">
-                    <i class="bi bi-play-fill"></i>
-                  </div>
+                  <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                  <span class="play-label">Watch Demo</span>
                 </div>
               </div>
+              <iframe id="ytPlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Extej Loan Demo Video" style="display:none;"></iframe>
             </div>
-            <p class="demo-desc">
-              Unlock maximum earnings with carefully selected DeFi products sourced from
-              various blockchain protocols, designed to deliver exceptional performance.
-            </p>
-            <p class="demo-desc">
-              This video will help you get familiar with how our system works and see an
-              example of how to use it properly.
-            </p>
-            <p class="demo-desc">
-              Get your loan and let SmartVaults automatically manage crypto volatility.
-            </p>
+            <p class="demo-desc">Unlock maximum earnings with carefully selected DeFi products sourced from various blockchain protocols, designed to deliver exceptional performance.</p>
+            <p class="demo-desc">This video will help you get familiar with how our system works and see an example of how to use it properly.</p>
+            <p class="demo-desc">Get your loan and let SmartVaults automatically manage crypto volatility.</p>
             <p class="demo-quick">Quick Links:</p>
-            <a href="#" class="demo-link">0% interest at 50% LTV for 3 months</a>
-            <div class="mt-2">
-              <a href="#" class="more-info-link">More Info →</a>
-            </div>
+            <a href="#" class="demo-link" id="zeroRiskQuickLink">0% interest at 50% LTV for 3 months</a>
+            <div class="mt-2"><a href="#" class="more-info-link">More Info &rarr;</a></div>
           </div>
-
-        </div><!-- /col right -->
-
-      </div><!-- /row -->
-
+        </div>
+      </div>
     </main>
-  </div><!-- /main-column -->
-</div><!-- /app-wrapper -->
+  </div>
+</div>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="api/loans.js"></script>
+<script src="api/wallet.js"></script>
+<script src="api/notifications.js"></script>
+<script src="api/auth.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
