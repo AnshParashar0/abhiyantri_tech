@@ -1,5 +1,81 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+  // ---- RESILIENT API BINDINGS ----
+  var AuthAPI = window.AuthAPI || {
+    getCurrentUser: function () {
+      return Promise.resolve({
+        id: "usr_001",
+        name: "Austin Robertson",
+        role: "Marketing Administrator",
+        email: "austin.robertson@extej.io",
+        avatarUrl: "https://ui-avatars.com/api/?name=Austin+Robertson&background=2563EB&color=fff&size=80",
+        country: "GB"
+      });
+    },
+    updatePreferences: function () { return Promise.resolve({ success: true }); },
+    logout: function () { return Promise.resolve(); }
+  };
+
+  var LoansAPI = window.LoansAPI || {
+    getLoanOptions: function () {
+      return Promise.resolve([
+        { amount: 50, label: "50", currency: "EUR" },
+        { amount: 100, label: "100", currency: "EUR" },
+        { amount: 250, label: "250", currency: "EUR" },
+        { amount: 500, label: "500", currency: "EUR" }
+      ]);
+    },
+    calculateLoan: function (amount, currency, collateralBtc) {
+      var rate = 24117.08;
+      var ltv = 50;
+      var collateral = collateralBtc || parseFloat((amount / (rate * ltv / 100)).toFixed(6));
+      return Promise.resolve({
+        loanAmount: amount.toFixed(2),
+        currency: currency,
+        collateralBtc: collateral.toString(),
+        loanToValue: ltv + "%",
+        interestRate: "0%",
+        loanTerm: "3 months",
+        originationFee: "2.5%",
+        exchangeRate: rate.toFixed(2),
+        totalInterest: "0.00",
+        monthlyPayment: (amount / 3).toFixed(2)
+      });
+    },
+    applyForLoan: function () { return Promise.resolve({ loanId: "LN-" + Math.floor(1000 + Math.random() * 9000) }); },
+    getUserLoans: function () {
+      return Promise.resolve([
+        { id: "LN-001", tag: "Bitcoin-backed", status: "active", remainingLoan: 234.50, currency: "EUR", collateral: "0.0097 BTC", maturityDate: "2024-12-15", term: "3 months", ltv: "50" },
+        { id: "LN-002", tag: "Bitcoin-backed", status: "warning", remainingLoan: 100.00, currency: "EUR", collateral: "0.0042 BTC", maturityDate: "2025-01-10", term: "3 months", ltv: "68" }
+      ]);
+    }
+  };
+
+  var WalletAPI = window.WalletAPI || {
+    getWalletBalance: function () { return Promise.resolve({ btc: 0.25, eur: 6029.27, usd: 6540.10, gbp: 5180.44 }); },
+    getSupportedCurrencies: function () {
+      return Promise.resolve([
+        { code: "EUR", name: "Euro", flag: "\uD83C\uDDEA\uD83C\uDDFA", rate: 24117.08 },
+        { code: "USD", name: "US Dollar", flag: "\uD83C\uDDFA\uD83C\uDDF8", rate: 26160.40 },
+        { code: "GBP", name: "British Pound", flag: "\uD83C\uDDEC\uD83C\uDDE7", rate: 20721.76 },
+        { code: "CHF", name: "Swiss Franc", flag: "\uD83C\uDDE8\uD83C\uDDED", rate: 23408.10 }
+      ]);
+    },
+    getExchangeRate: function () { return Promise.resolve(24117.08); }
+  };
+
+  var NotificationsAPI = window.NotificationsAPI || {
+    getNotifications: function () {
+      return Promise.resolve([
+        { id: "n1", type: "info", title: "Margin Call Alert", message: "LTV ratio reached 68% on Loan #LN-002.", timestamp: new Date(Date.now() - 7200000).toISOString(), read: false },
+        { id: "n2", type: "success", title: "Loan Approved", message: "Your 100 EUR loan application was approved.", timestamp: new Date(Date.now() - 86400000).toISOString(), read: false }
+      ]);
+    },
+    getUnreadCount: function () { return Promise.resolve(2); },
+    markAsRead: function () { return Promise.resolve(); },
+    markAllRead: function () { return Promise.resolve(); }
+  };
+
   var State = {
     selectedAmount: 100,
     selectedCurrency: "EUR",
