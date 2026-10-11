@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Extej - Wallet</title>
   <meta name="description" content="Extej crypto wallet - get zero-interest Bitcoin-backed loans, manage collateral, and track your loan portfolio." />
+  <link rel="icon" type="image/svg+xml" href="public/extej-icon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="style.css" />
@@ -19,7 +20,7 @@
     <button class="notif-clear-btn" id="markAllReadBtn" type="button">Mark all read</button>
   </div>
   <div class="notif-list" id="notifList">
-    <div style="padding:20px;text-align:center;color:#94A3B8;font-size:.78rem;">Loading...</div>
+    <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:.78rem;">Loading...</div>
   </div>
   <div style="padding:10px 14px;border-top:1px solid var(--divider);text-align:center;background:var(--panel-bg);">
     <a href="#notifications" class="btn btn-sm btn-outline-primary w-100" id="drawerToNotifPage"><i class="bi bi-bell-fill me-1"></i> Open Notifications Center</a>
@@ -44,9 +45,9 @@
       <div><div class="settings-item-label">2-Factor Auth</div><div class="settings-item-sub">Currently enabled</div></div>
       <label class="toggle"><input type="checkbox" id="twoFaToggle" checked /><span class="toggle-slider"></span></label>
     </div>
-    <div class="settings-item" style="border-top:1px solid #F1F5F9;margin-top:4px;padding-top:14px;">
+    <div class="settings-item" style="border-top:1px solid var(--border);margin-top:4px;padding-top:14px;">
       <div><div class="settings-item-label">Language</div><div class="settings-item-sub" id="langLabel">English (GB)</div></div>
-      <i class="bi bi-chevron-right" style="color:#94A3B8;font-size:.8rem;"></i>
+      <i class="bi bi-chevron-right" style="color:var(--text-muted);font-size:.8rem;"></i>
     </div>
     <div class="mt-3 pt-2">
       <a href="#settings" class="btn btn-sm btn-primary w-100" id="drawerToSettingsPage"><i class="bi bi-gear-fill me-1"></i> Advanced Settings Page</a>
@@ -62,7 +63,7 @@
   </div>
   <div class="profile-panel-body">
     <div class="profile-avatar-wrap">
-      <img id="profileAvatar" src="https://ui-avatars.com/api/?name=Austin+Robertson&background=4F46E5&color=fff&size=80" alt="User Avatar" class="profile-avatar-img" />
+      <img id="profileAvatar" src="https://ui-avatars.com/api/?name=Austin+Robertson&background=131A2E&color=E6EAF5&size=80" alt="User Avatar" class="profile-avatar-img" />
     </div>
     <div class="profile-name" id="profileName">Austin Robertson</div>
     <div class="profile-role" id="profileRole">Marketing Administrator</div>
@@ -91,7 +92,7 @@
         <div class="modal-summary-row"><span class="modal-summary-label">Collateral (BTC)</span><span class="modal-summary-value" id="reviewCollateral">-</span></div>
         <div class="modal-summary-row"><span class="modal-summary-label">Loan-to-Value</span><span class="modal-summary-value" id="reviewLtv">50%</span></div>
         <hr class="modal-divider" />
-        <div class="modal-summary-row"><span class="modal-summary-label">Interest Rate</span><span class="modal-summary-value" style="color:#059669;">0%</span></div>
+        <div class="modal-summary-row"><span class="modal-summary-label">Interest Rate</span><span class="modal-summary-value" style="color:var(--success);">0%</span></div>
         <div class="modal-summary-row"><span class="modal-summary-label">Term</span><span class="modal-summary-value">3 months</span></div>
         <div class="modal-summary-row"><span class="modal-summary-label">Monthly Payment</span><span class="modal-summary-value" id="reviewMonthly">-</span></div>
         <div class="modal-summary-row"><span class="modal-summary-label">Origination Fee</span><span class="modal-summary-value">2.5%</span></div>
@@ -145,8 +146,7 @@
 <div class="offcanvas offcanvas-start sidebar-offcanvas" tabindex="-1" id="mobileSidebar">
   <div class="offcanvas-header border-0 pb-0">
     <div class="brand d-flex align-items-center gap-2">
-      <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><polygon points="15,2 28,26 2,26" fill="#2563EB"/><polygon points="15,8 24,26 6,26" fill="#1D4ED8" opacity=".7"/></svg>
-      <span class="brand-name">Extej</span>
+      <img src="public/extej-icon.svg" alt="Extej" class="logo-icon" />
     </div>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
@@ -156,8 +156,7 @@
 <div class="app-wrapper">
   <aside class="sidebar d-none d-md-flex flex-column">
     <div class="sidebar-brand d-flex align-items-center gap-2">
-      <svg width="32" height="32" viewBox="0 0 30 30" fill="none"><polygon points="15,2 28,26 2,26" fill="#2563EB"/><polygon points="15,8 24,26 6,26" fill="#1D4ED8" opacity=".7"/></svg>
-      <span class="brand-name">Extej</span>
+      <img src="public/extej-logo.svg" alt="Extej" class="logo" />
     </div>
     <nav class="sidebar-nav" id="sidebarNav">
       <p class="nav-section-label">PAGES</p>
@@ -301,18 +300,18 @@
             <div class="panel-card mb-3">
               <div class="panel-header-row">
                 <span class="panel-header-title">Loan Summary</span>
-                <button class="icon-btn" id="summarySettingsBtn" type="button"><i class="bi bi-gear-fill" style="color:#94A3B8;font-size:.9rem;"></i></button>
+                <button class="icon-btn" id="summarySettingsBtn" type="button"><i class="bi bi-gear-fill" style="color:var(--text-muted);font-size:.9rem;"></i></button>
               </div>
               <div class="detail-row"><span class="detail-label">Total Loan Repayment</span><span class="detail-value highlight" id="sumTotalRepayment">&#9679; -</span></div>
               <hr class="detail-divider" />
-              <div class="detail-row"><span class="detail-label">Interest Rate</span><span class="detail-value" id="sumInterestRate" style="color:#059669;">0%</span></div>
+              <div class="detail-row"><span class="detail-label">Interest Rate</span><span class="detail-value" id="sumInterestRate" style="color:var(--success);">0%</span></div>
               <div class="detail-row"><span class="detail-label">Loan-to-Value</span><span class="detail-value" id="sumLtv">50%</span></div>
               <div class="detail-row"><span class="detail-label">Loan Term</span><span class="detail-value" id="sumLoanTerm">3 months</span></div>
               <div class="detail-row"><span class="detail-label">Collateral (BTC)</span><span class="detail-value" id="sumCollateral">-</span></div>
               <div class="detail-row"><span class="detail-label">BTC / <span id="sumCurrencyLabel">EUR</span> Rate</span><span class="detail-value" id="sumExchangeRate">24,117.08</span></div>
               <hr class="detail-divider" />
               <div class="detail-row"><span class="detail-label">Origination Fee</span><span class="detail-value" id="sumOriginationFee">2.5%</span></div>
-              <div class="detail-row"><span class="detail-label">Early Repayment Option</span><span class="detail-value" style="color:#059669;">Free</span></div>
+              <div class="detail-row"><span class="detail-label">Early Repayment Option</span><span class="detail-value" style="color:var(--success);">Free</span></div>
               <hr class="detail-divider" />
               <div class="detail-row"><span class="detail-label">Loan Amount</span><span class="detail-value" id="sumLoanAmount">-</span></div>
               <div class="detail-row"><span class="detail-label">Total Cost of Loan (Interest)</span><span class="detail-value" id="sumTotalInterest">0.00</span></div>
@@ -322,12 +321,10 @@
             <div class="panel-card demo-card">
               <h3 class="demo-title">Watch a demo:</h3>
               <div class="video-wrapper" id="videoWrapper">
-                <div class="video-thumb" id="videoThumb">
-                  <div class="play-btn-wrap">
-                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
-                    <span class="play-label">Watch Demo</span>
-                  </div>
-                </div>
+                <button class="video-thumb" id="videoThumb" type="button" aria-label="Play demo video">
+                  <img src="https://img.youtube.com/vi/C5J6trjtVDk/maxresdefault.jpg" data-fallback="https://img.youtube.com/vi/C5J6trjtVDk/hqdefault.jpg" alt="Watch demo" />
+                  <span class="play-btn" aria-hidden="true">&#9654;</span>
+                </button>
                 <iframe id="ytPlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Extej Loan Demo Video" style="display:none;"></iframe>
               </div>
               <p class="demo-desc">Unlock maximum earnings with carefully selected DeFi products sourced from various blockchain protocols, designed to deliver exceptional performance.</p>
@@ -780,15 +777,15 @@
                 <label class="form-label-custom mb-2">Accent Color Style</label>
                 <div class="theme-selector-grid">
                   <div class="theme-card-option active" data-color="blue">
-                    <div class="theme-preview-circle" style="background:#2563eb;color:#fff;"><i class="bi bi-check"></i></div>
+                    <div class="theme-preview-circle" style="background:var(--primary);color:var(--on-primary);"><i class="bi bi-check"></i></div>
                     <div class="small fw-semibold">Fintech Blue</div>
                   </div>
                   <div class="theme-card-option" data-color="emerald">
-                    <div class="theme-preview-circle" style="background:#059669;color:#fff;"></div>
+                    <div class="theme-preview-circle" style="background:var(--primary-hover);color:var(--on-primary);"></div>
                     <div class="small fw-semibold">Emerald Green</div>
                   </div>
                   <div class="theme-card-option" data-color="purple">
-                    <div class="theme-preview-circle" style="background:#7c3aed;color:#fff;"></div>
+                    <div class="theme-preview-circle" style="background:var(--surface-2);color:var(--text);"></div>
                     <div class="small fw-semibold">Indigo Violet</div>
                   </div>
                 </div>

@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function renderNotifications() {
-      if (!State.notifications.length) { list.innerHTML = '<div style="padding:20px;text-align:center;color:#94A3B8;font-size:.78rem;">No notifications</div>'; return; }
+      if (!State.notifications.length) { list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:.78rem;">No notifications</div>'; return; }
       var iconMap = { info: "bi-info-circle", success: "bi-check-circle", warning: "bi-exclamation-triangle", danger: "bi-x-circle" };
       list.innerHTML = State.notifications.map(function (n) {
         return '<div class="notif-item ' + (n.read ? "" : "unread") + '" data-id="' + n.id + '">'
@@ -496,7 +496,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function loadLoansTable() {
     var tbody = document.getElementById("loansTableBody");
     if (!tbody) return;
-    tbody.innerHTML = '<tr><td colspan="8"><div style="padding:28px;text-align:center;color:#94A3B8;font-size:.78rem;">Loading your loans...</div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8"><div style="padding:28px;text-align:center;color:var(--text-muted);font-size:.78rem;">Loading your loans...</div></td></tr>';
     LoansAPI.getUserLoans().then(function (loans) {
       State.loansData = loans; renderLoansTable(loans);
       var meta = document.getElementById("loansTableMeta");
@@ -549,8 +549,16 @@ document.addEventListener("DOMContentLoaded", function () {
   function initVideo() {
     var videoThumb  = document.getElementById("videoThumb");
     var ytPlayer    = document.getElementById("ytPlayer");
-    var playBtnWrap = document.querySelector(".play-btn-wrap");
+    var videoImage  = videoThumb && videoThumb.querySelector("img");
     var YT_VIDEO_ID = "C5J6trjtVDk";
+
+    if (videoImage) {
+      videoImage.addEventListener("error", function () {
+        if (videoImage.dataset.fallbackApplied) return;
+        videoImage.dataset.fallbackApplied = "true";
+        videoImage.src = videoImage.dataset.fallback;
+      });
+    }
 
     function playVideo() {
       if (ytPlayer && videoThumb) {
@@ -560,7 +568,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    if (playBtnWrap) playBtnWrap.addEventListener("click", playVideo);
     if (videoThumb) videoThumb.addEventListener("click", playVideo);
   }
 

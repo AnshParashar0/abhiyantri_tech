@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 64" width="210" height="64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34D399"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#g)"/>
+  <g fill="#fff">
+    <rect x="18" y="15" width="28" height="7" rx="3.5"/>
+    <rect x="18" y="28.5" width="16" height="7" rx="3.5"/>
+    <rect x="18" y="42" width="28" height="7" rx="3.5"/>
+    <rect x="18" y="15" width="7" height="34" rx="3.5"/>
+  </g>
+  <circle cx="43" cy="32" r="5.5" fill="#F7931A" stroke="#fff" stroke-width="2"/>
+  <text x="78" y="43" font-family="Inter, system-ui, sans-serif" font-size="34" font-weight="700" letter-spacing="-0.5" fill="#E6EAF5">Extej</text>
+</svg>
