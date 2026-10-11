@@ -21,11 +21,14 @@
   <div class="notif-list" id="notifList">
     <div style="padding:20px;text-align:center;color:#94A3B8;font-size:.78rem;">Loading...</div>
   </div>
+  <div style="padding:10px 14px;border-top:1px solid var(--divider);text-align:center;background:var(--panel-bg);">
+    <a href="#notifications" class="btn btn-sm btn-outline-primary w-100" id="drawerToNotifPage"><i class="bi bi-bell-fill me-1"></i> Open Notifications Center</a>
+  </div>
 </div>
 
 <div class="settings-panel" id="settingsPanel">
   <div class="settings-panel-header">
-    <span class="settings-panel-title">Settings</span>
+    <span class="settings-panel-title">Quick Settings</span>
     <button class="icon-btn" id="settingsPanelClose" type="button"><i class="bi bi-x-lg"></i></button>
   </div>
   <div class="settings-body">
@@ -45,6 +48,9 @@
       <div><div class="settings-item-label">Language</div><div class="settings-item-sub" id="langLabel">English (GB)</div></div>
       <i class="bi bi-chevron-right" style="color:#94A3B8;font-size:.8rem;"></i>
     </div>
+    <div class="mt-3 pt-2">
+      <a href="#settings" class="btn btn-sm btn-primary w-100" id="drawerToSettingsPage"><i class="bi bi-gear-fill me-1"></i> Advanced Settings Page</a>
+    </div>
   </div>
 </div>
 
@@ -61,6 +67,9 @@
     <div class="profile-name" id="profileName">Austin Robertson</div>
     <div class="profile-role" id="profileRole">Marketing Administrator</div>
     <div class="profile-email" id="profileEmail">austin.robertson@extej.io</div>
+    <div class="mt-3">
+      <a href="#profile" class="btn btn-sm btn-outline-primary w-100" id="drawerToProfilePage"><i class="bi bi-person-gear me-1"></i> Edit Full Profile Page</a>
+    </div>
     <hr class="profile-divider" />
     <button class="profile-logout-btn" id="profileLogoutBtn" type="button">
       <i class="bi bi-box-arrow-right"></i> Log Out
@@ -152,25 +161,20 @@
     </div>
     <nav class="sidebar-nav" id="sidebarNav">
       <p class="nav-section-label">PAGES</p>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-bar-chart-line"></i></span><span class="nav-text">Markets</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-arrow-left-right"></i></span><span class="nav-text">Trading</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item active" id="nav-wallet"><span class="nav-icon"><i class="bi bi-wallet2"></i></span><span class="nav-text">Wallet</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-currency-dollar"></i></span><span class="nav-text">Loans</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-safe2"></i></span><span class="nav-text">Vaults</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-briefcase"></i></span><span class="nav-text">Portfolio</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-droplet-half"></i></span><span class="nav-text">Liquidity Pools</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-arrow-repeat"></i></span><span class="nav-text">Swap</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#wallet" class="nav-item active" id="nav-wallet" data-view="wallet"><span class="nav-icon"><i class="bi bi-wallet2"></i></span><span class="nav-text">Wallet</span><span class="nav-badge">1</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#table" class="nav-item" id="nav-table" data-view="table"><span class="nav-icon"><i class="bi bi-table"></i></span><span class="nav-text">Records Table</span><span class="nav-badge" id="navRecordsBadge">5</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#form" class="nav-item" id="nav-form" data-view="form"><span class="nav-icon"><i class="bi bi-ui-checks"></i></span><span class="nav-text">Manage Form</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#profile" class="nav-item" id="nav-profile" data-view="profile"><span class="nav-icon"><i class="bi bi-person-circle"></i></span><span class="nav-text">User Profile</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#notifications" class="nav-item" id="nav-notifications" data-view="notifications"><span class="nav-icon"><i class="bi bi-bell"></i></span><span class="nav-text">Notifications</span><span class="nav-badge" id="navNotifBadge">2</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#settings" class="nav-item" id="nav-settings" data-view="settings"><span class="nav-icon"><i class="bi bi-gear"></i></span><span class="nav-text">Settings</span><i class="bi bi-chevron-right nav-arrow"></i></a>
       <p class="nav-section-label mt-1">ELEMENTS</p>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-grid"></i></span><span class="nav-text">Menu Styles</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-table"></i></span><span class="nav-text">Tables</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-bar-chart"></i></span><span class="nav-text">Charts</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-ui-checks"></i></span><span class="nav-text">Forms</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-tag"></i></span><span class="nav-text">Pricing</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-gear"></i></span><span class="nav-text">Settings</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-window-stack"></i></span><span class="nav-text">Modals</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#table" class="nav-item" data-view="table"><span class="nav-icon"><i class="bi bi-table"></i></span><span class="nav-text">Tables</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#form" class="nav-item" data-view="form"><span class="nav-icon"><i class="bi bi-pencil-square"></i></span><span class="nav-text">Forms</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#settings" class="nav-item" data-view="settings"><span class="nav-icon"><i class="bi bi-sliders"></i></span><span class="nav-text">Settings</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item" id="nav-modals-demo"><span class="nav-icon"><i class="bi bi-window-stack"></i></span><span class="nav-text">Modals</span><i class="bi bi-chevron-right nav-arrow"></i></a>
       <p class="nav-section-label mt-1">DOCUMENTATION</p>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-file-text"></i></span><span class="nav-text">Documentation</span><i class="bi bi-chevron-right nav-arrow"></i></a>
-      <a href="#" class="nav-item"><span class="nav-icon"><i class="bi bi-life-preserver"></i></span><span class="nav-text">Support</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item" onclick="alert('Extej DeFi & Custody Documentation Portal');return false;"><span class="nav-icon"><i class="bi bi-file-text"></i></span><span class="nav-text">Documentation</span><i class="bi bi-chevron-right nav-arrow"></i></a>
+      <a href="#" class="nav-item" onclick="alert('Support Desk: support@extej.io');return false;"><span class="nav-icon"><i class="bi bi-life-preserver"></i></span><span class="nav-text">Support</span><i class="bi bi-chevron-right nav-arrow"></i></a>
     </nav>
   </aside>
 
@@ -213,121 +217,861 @@
     </header>
 
     <main class="page-content">
-      <h1 class="page-title">Wallet</h1>
-      <div class="loan-tabs">
-        <button class="tab-btn" id="flexLoanTab" type="button">FLEXIBLE LOAN</button>
-        <button class="tab-btn active" id="quickLoanTab" type="button">QUICK LOAN</button>
-      </div>
+      <!-- ══════════════════════════════════════════════════
+           VIEW 1: WALLET (ORIGINAL CRYPTO LOAN DASHBOARD)
+      ══════════════════════════════════════════════════ -->
+      <div class="view-section active" id="view-wallet">
+        <h1 class="page-title">Wallet</h1>
+        <div class="loan-tabs">
+          <button class="tab-btn" id="flexLoanTab" type="button">FLEXIBLE LOAN</button>
+          <button class="tab-btn active" id="quickLoanTab" type="button">QUICK LOAN</button>
+        </div>
 
-      <div class="row g-3 g-lg-4">
-        <div class="col-12 col-xl-8">
-          <div class="panel-card mb-3">
-            <p class="panel-label">I Need A Loan In</p>
-            <div class="currency-dropdown-wrap">
-              <button class="currency-select-btn" id="currencySelectBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
-                <span class="currency-flag" id="selectedCurrencyFlag">&#127466;&#127482;</span>
-                <span class="currency-code" id="selectedCurrencyCode">EUR</span>
-                <span class="currency-name" id="selectedCurrencyName">Euro</span>
-                <i class="bi bi-chevron-down currency-chevron"></i>
-              </button>
-              <div class="currency-dropdown-menu" id="currencyDropdownMenu" role="listbox"></div>
-            </div>
-            <div class="amount-grid" id="amountGrid">
-              <div class="amount-card" style="grid-column:1/-1;justify-content:center;min-height:80px;">
-                <span class="skeleton" style="width:80px;height:20px;"></span>
+        <div class="row g-3 g-lg-4">
+          <div class="col-12 col-xl-8">
+            <div class="panel-card mb-3">
+              <p class="panel-label">I Need A Loan In</p>
+              <div class="currency-dropdown-wrap">
+                <button class="currency-select-btn" id="currencySelectBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="currency-flag" id="selectedCurrencyFlag">&#127466;&#127482;</span>
+                  <span class="currency-code" id="selectedCurrencyCode">EUR</span>
+                  <span class="currency-name" id="selectedCurrencyName">Euro</span>
+                  <i class="bi bi-chevron-down currency-chevron"></i>
+                </button>
+                <div class="currency-dropdown-menu" id="currencyDropdownMenu" role="listbox"></div>
+              </div>
+              <div class="amount-grid" id="amountGrid">
+                <div class="amount-card" style="grid-column:1/-1;justify-content:center;min-height:80px;">
+                  <span class="skeleton" style="width:80px;height:20px;"></span>
+                </div>
+              </div>
+              <div class="custom-amount-input-wrap" id="customAmountWrap">
+                <input type="number" class="custom-amount-field" id="customAmountInput" placeholder="Enter custom amount (e.g. 750)" min="10" max="50000" step="10" />
+              </div>
+              <div class="collateral-header">
+                <span class="collateral-label">Collateral (BTC)</span>
+                <span class="collateral-balance" id="collateralBalance">Balance: 0.25 BTC</span>
+              </div>
+              <div class="collateral-input-wrap">
+                <div class="btc-pill"><span class="btc-symbol">&#8383;</span><span>BTC</span></div>
+                <input type="number" class="collateral-number-input" id="collateralInput" placeholder="0.000000" min="0" step="0.000001" />
+                <span class="ltv-badge safe" id="ltvBadge">LTV 50%</span>
+              </div>
+              <div class="ltv-bar-wrap">
+                <div class="ltv-bar-labels">
+                  <span class="ltv-bar-label">Loan-to-Value</span>
+                  <span class="ltv-bar-value" id="ltvBarValue">50%</span>
+                </div>
+                <div class="ltv-track"><div class="ltv-fill" id="ltvFill" style="width:50%;"></div></div>
+              </div>
+              <div class="action-btns">
+                <button class="btn-zero-risk" id="zeroRiskBtn" type="button"><i class="bi bi-shield-check me-1"></i>Zero Risk Loans</button>
+                <button class="btn-get-loan" id="getLoanBtn" type="button">Get A Loan <i class="bi bi-arrow-right ms-1"></i></button>
               </div>
             </div>
-            <div class="custom-amount-input-wrap" id="customAmountWrap">
-              <input type="number" class="custom-amount-field" id="customAmountInput" placeholder="Enter custom amount (e.g. 750)" min="10" max="50000" step="10" />
-            </div>
-            <div class="collateral-header">
-              <span class="collateral-label">Collateral (BTC)</span>
-              <span class="collateral-balance" id="collateralBalance">Balance: 0.25 BTC</span>
-            </div>
-            <div class="collateral-input-wrap">
-              <div class="btc-pill"><span class="btc-symbol">&#8383;</span><span>BTC</span></div>
-              <input type="number" class="collateral-number-input" id="collateralInput" placeholder="0.000000" min="0" step="0.000001" />
-              <span class="ltv-badge safe" id="ltvBadge">LTV 50%</span>
-            </div>
-            <div class="ltv-bar-wrap">
-              <div class="ltv-bar-labels">
-                <span class="ltv-bar-label">Loan-to-Value</span>
-                <span class="ltv-bar-value" id="ltvBarValue">50%</span>
+
+            <div class="panel-card">
+              <div class="section-header">
+                <h2 class="section-title">Your Loans</h2>
+                <span class="table-meta" id="loansTableMeta">Loading...</span>
               </div>
-              <div class="ltv-track"><div class="ltv-fill" id="ltvFill" style="width:50%;"></div></div>
-            </div>
-            <div class="action-btns">
-              <button class="btn-zero-risk" id="zeroRiskBtn" type="button"><i class="bi bi-shield-check me-1"></i>Zero Risk Loans</button>
-              <button class="btn-get-loan" id="getLoanBtn" type="button">Get A Loan <i class="bi bi-arrow-right ms-1"></i></button>
+              <div class="table-responsive">
+                <table class="loans-table" id="loansTable">
+                  <thead>
+                    <tr>
+                      <th>Loan # <i class="bi bi-arrow-down-up sort-icon" data-col="id"></i></th>
+                      <th>Status <i class="bi bi-arrow-down-up sort-icon" data-col="status"></i></th>
+                      <th>Remaining <i class="bi bi-arrow-down-up sort-icon" data-col="remainingLoan"></i></th>
+                      <th>Collateral <i class="bi bi-arrow-down-up sort-icon" data-col="collateral"></i></th>
+                      <th>Maturity <i class="bi bi-arrow-down-up sort-icon" data-col="maturityDate"></i></th>
+                      <th>Term <i class="bi bi-arrow-down-up sort-icon" data-col="term"></i></th>
+                      <th>LTV <i class="bi bi-arrow-down-up sort-icon" data-col="ltv"></i></th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="loansTableBody">
+                    <tr><td colspan="8" class="table-empty"><i class="bi bi-hourglass-split"></i><p>Loading your loans...</p></td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
-          <div class="panel-card">
-            <div class="section-header">
-              <h2 class="section-title">Your Loans</h2>
-              <span class="table-meta" id="loansTableMeta">Loading...</span>
+          <div class="col-12 col-xl-4">
+            <div class="panel-card mb-3">
+              <div class="panel-header-row">
+                <span class="panel-header-title">Loan Summary</span>
+                <button class="icon-btn" id="summarySettingsBtn" type="button"><i class="bi bi-gear-fill" style="color:#94A3B8;font-size:.9rem;"></i></button>
+              </div>
+              <div class="detail-row"><span class="detail-label">Total Loan Repayment</span><span class="detail-value highlight" id="sumTotalRepayment">&#9679; -</span></div>
+              <hr class="detail-divider" />
+              <div class="detail-row"><span class="detail-label">Interest Rate</span><span class="detail-value" id="sumInterestRate" style="color:#059669;">0%</span></div>
+              <div class="detail-row"><span class="detail-label">Loan-to-Value</span><span class="detail-value" id="sumLtv">50%</span></div>
+              <div class="detail-row"><span class="detail-label">Loan Term</span><span class="detail-value" id="sumLoanTerm">3 months</span></div>
+              <div class="detail-row"><span class="detail-label">Collateral (BTC)</span><span class="detail-value" id="sumCollateral">-</span></div>
+              <div class="detail-row"><span class="detail-label">BTC / <span id="sumCurrencyLabel">EUR</span> Rate</span><span class="detail-value" id="sumExchangeRate">24,117.08</span></div>
+              <hr class="detail-divider" />
+              <div class="detail-row"><span class="detail-label">Origination Fee</span><span class="detail-value" id="sumOriginationFee">2.5%</span></div>
+              <div class="detail-row"><span class="detail-label">Early Repayment Option</span><span class="detail-value" style="color:#059669;">Free</span></div>
+              <hr class="detail-divider" />
+              <div class="detail-row"><span class="detail-label">Loan Amount</span><span class="detail-value" id="sumLoanAmount">-</span></div>
+              <div class="detail-row"><span class="detail-label">Total Cost of Loan (Interest)</span><span class="detail-value" id="sumTotalInterest">0.00</span></div>
+              <div class="detail-row"><span class="detail-label">Monthly Payment</span><span class="detail-value" id="sumMonthlyPayment">-</span></div>
             </div>
-            <div class="table-responsive">
-              <table class="loans-table" id="loansTable">
-                <thead>
-                  <tr>
-                    <th>Loan # <i class="bi bi-arrow-down-up sort-icon" data-col="id"></i></th>
-                    <th>Status <i class="bi bi-arrow-down-up sort-icon" data-col="status"></i></th>
-                    <th>Remaining <i class="bi bi-arrow-down-up sort-icon" data-col="remainingLoan"></i></th>
-                    <th>Collateral <i class="bi bi-arrow-down-up sort-icon" data-col="collateral"></i></th>
-                    <th>Maturity <i class="bi bi-arrow-down-up sort-icon" data-col="maturityDate"></i></th>
-                    <th>Term <i class="bi bi-arrow-down-up sort-icon" data-col="term"></i></th>
-                    <th>LTV <i class="bi bi-arrow-down-up sort-icon" data-col="ltv"></i></th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="loansTableBody">
-                  <tr><td colspan="8" class="table-empty"><i class="bi bi-hourglass-split"></i><p>Loading your loans...</p></td></tr>
-                </tbody>
-              </table>
+
+            <div class="panel-card demo-card">
+              <h3 class="demo-title">Watch a demo:</h3>
+              <div class="video-wrapper" id="videoWrapper">
+                <div class="video-thumb" id="videoThumb">
+                  <div class="play-btn-wrap">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <span class="play-label">Watch Demo</span>
+                  </div>
+                </div>
+                <iframe id="ytPlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Extej Loan Demo Video" style="display:none;"></iframe>
+              </div>
+              <p class="demo-desc">Unlock maximum earnings with carefully selected DeFi products sourced from various blockchain protocols, designed to deliver exceptional performance.</p>
+              <p class="demo-desc">This video will help you get familiar with how our system works and see an example of how to use it properly.</p>
+              <p class="demo-desc">Get your loan and let SmartVaults automatically manage crypto volatility.</p>
+              <p class="demo-quick">Quick Links:</p>
+              <a href="#" class="demo-link" id="zeroRiskQuickLink">0% interest at 50% LTV for 3 months</a>
+              <div class="mt-2"><a href="#" class="more-info-link">More Info &rarr;</a></div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-12 col-xl-4">
-          <div class="panel-card mb-3">
-            <div class="panel-header-row">
-              <span class="panel-header-title">Loan Summary</span>
-              <button class="icon-btn" id="summarySettingsBtn" type="button"><i class="bi bi-gear-fill" style="color:#94A3B8;font-size:.9rem;"></i></button>
-            </div>
-            <div class="detail-row"><span class="detail-label">Total Loan Repayment</span><span class="detail-value highlight" id="sumTotalRepayment">&#9679; -</span></div>
-            <hr class="detail-divider" />
-            <div class="detail-row"><span class="detail-label">Interest Rate</span><span class="detail-value" id="sumInterestRate" style="color:#059669;">0%</span></div>
-            <div class="detail-row"><span class="detail-label">Loan-to-Value</span><span class="detail-value" id="sumLtv">50%</span></div>
-            <div class="detail-row"><span class="detail-label">Loan Term</span><span class="detail-value" id="sumLoanTerm">3 months</span></div>
-            <div class="detail-row"><span class="detail-label">Collateral (BTC)</span><span class="detail-value" id="sumCollateral">-</span></div>
-            <div class="detail-row"><span class="detail-label">BTC / <span id="sumCurrencyLabel">EUR</span> Rate</span><span class="detail-value" id="sumExchangeRate">24,117.08</span></div>
-            <hr class="detail-divider" />
-            <div class="detail-row"><span class="detail-label">Origination Fee</span><span class="detail-value" id="sumOriginationFee">2.5%</span></div>
-            <div class="detail-row"><span class="detail-label">Early Repayment Option</span><span class="detail-value" style="color:#059669;">Free</span></div>
-            <hr class="detail-divider" />
-            <div class="detail-row"><span class="detail-label">Loan Amount</span><span class="detail-value" id="sumLoanAmount">-</span></div>
-            <div class="detail-row"><span class="detail-label">Total Cost of Loan (Interest)</span><span class="detail-value" id="sumTotalInterest">0.00</span></div>
-            <div class="detail-row"><span class="detail-label">Monthly Payment</span><span class="detail-value" id="sumMonthlyPayment">-</span></div>
+      <!-- ══════════════════════════════════════════════════
+           VIEW 2: RECORDS TABLE (DISPLAY, VIEW/EDIT & DELETE)
+      ══════════════════════════════════════════════════ -->
+      <div class="view-section" id="view-table">
+        <div class="breadcrumb-nav">
+          <a href="#wallet"><i class="bi bi-house-door"></i> Home</a>
+          <span>/</span>
+          <span>Records Management</span>
+          <span>/</span>
+          <span class="text-primary fw-semibold">Records Table</span>
+        </div>
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+          <div>
+            <h1 class="page-title mb-1">Records Table</h1>
+            <p class="page-subtitle mb-0">Display submitted records with View/Edit and Delete management options.</p>
           </div>
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-primary d-inline-flex align-items-center gap-2" id="tableAddRecordBtn" type="button">
+              <i class="bi bi-plus-lg"></i> Add New Record
+            </button>
+            <button class="btn btn-outline-secondary d-inline-flex align-items-center gap-1" id="tableExportBtn" type="button" title="Export as JSON">
+              <i class="bi bi-download"></i> Export Data
+            </button>
+            <button class="btn btn-outline-secondary d-inline-flex align-items-center gap-1" id="tableResetBtn" type="button" title="Reset sample records">
+              <i class="bi bi-arrow-counterclockwise"></i> Reset Demo
+            </button>
+          </div>
+        </div>
 
-          <div class="panel-card demo-card">
-            <h3 class="demo-title">Watch a demo:</h3>
-            <div class="video-wrapper" id="videoWrapper">
-              <div class="video-thumb" id="videoThumb">
-                <div class="play-btn-wrap">
-                  <div class="play-btn"><i class="bi bi-play-fill"></i></div>
-                  <span class="play-label">Watch Demo</span>
+        <!-- KPI summary cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Total Records</span>
+              <span class="stat-number" id="kpiTotalRecords">0</span>
+              <span class="stat-subtext positive"><i class="bi bi-graph-up-arrow"></i> Active portfolio items</span>
+            </div>
+            <div class="stat-icon-wrap blue"><i class="bi bi-folder2-open"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Total Exposure</span>
+              <span class="stat-number" id="kpiTotalVolume">€0.00</span>
+              <span class="stat-subtext positive"><i class="bi bi-shield-check"></i> Principal balance</span>
+            </div>
+            <div class="stat-icon-wrap emerald"><i class="bi bi-currency-exchange"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Locked Collateral</span>
+              <span class="stat-number" id="kpiTotalCollateral">0.00 BTC</span>
+              <span class="stat-subtext"><i class="bi bi-safe"></i> SmartVault custody</span>
+            </div>
+            <div class="stat-icon-wrap amber"><i class="bi bi-coin"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Avg LTV Ratio</span>
+              <span class="stat-number" id="kpiAvgLtv">50%</span>
+              <span class="stat-subtext" id="kpiHealthStatus"><i class="bi bi-heart-pulse"></i> Safe risk ratio</span>
+            </div>
+            <div class="stat-icon-wrap purple"><i class="bi bi-speedometer2"></i></div>
+          </div>
+        </div>
+
+        <!-- Table Toolbar -->
+        <div class="table-toolbar">
+          <div class="toolbar-search">
+            <i class="bi bi-search"></i>
+            <input type="text" id="recordsSearchInput" placeholder="Search by ID, borrower name, asset, email..." />
+          </div>
+          <div class="toolbar-actions">
+            <select class="form-select form-select-sm" id="recordsStatusFilter" style="width:auto;min-width:140px;">
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="pending">Pending</option>
+              <option value="warning">Warning / Risk</option>
+              <option value="completed">Completed</option>
+            </select>
+            <select class="form-select form-select-sm" id="recordsTypeFilter" style="width:auto;min-width:170px;">
+              <option value="all">All Product Types</option>
+              <option value="Bitcoin-Backed Loan">Bitcoin-Backed</option>
+              <option value="Ethereum Smart Vault">Ethereum Vault</option>
+              <option value="Institutional Credit Line">Institutional Credit</option>
+              <option value="Solana High-Yield Collateral">Solana High-Yield</option>
+            </select>
+            <select class="form-select form-select-sm" id="recordsSortSelect" style="width:auto;min-width:140px;">
+              <option value="newest">Sort: Newest</option>
+              <option value="amount-high">Amount: High &rarr; Low</option>
+              <option value="amount-low">Amount: Low &rarr; High</option>
+              <option value="ltv-high">LTV: High Risk</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Panel Card for Table -->
+        <div class="panel-card p-0 overflow-hidden">
+          <div class="table-responsive">
+            <table class="records-table" id="recordsDataTable">
+              <thead>
+                <tr>
+                  <th>Record ID &amp; Type</th>
+                  <th>Borrower / Account</th>
+                  <th>Borrow Amount</th>
+                  <th>Collateral</th>
+                  <th>LTV</th>
+                  <th>Status</th>
+                  <th>Maturity</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recordsTableBody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex align-items-center justify-content-between p-3 border-top" style="border-color:var(--divider)!important;">
+            <span class="text-muted small" id="recordsTableCounter">Showing 0 of 0 records</span>
+            <div class="d-flex gap-2">
+              <span class="badge bg-secondary-subtle text-secondary py-2 px-3 small">View / Edit opens form pre-filled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════
+           VIEW 3: ADD / MANAGE FORM (ENTER & MANAGE DETAILS)
+      ══════════════════════════════════════════════════ -->
+      <div class="view-section" id="view-form">
+        <div class="breadcrumb-nav">
+          <a href="#wallet"><i class="bi bi-house-door"></i> Home</a>
+          <span>/</span>
+          <a href="#table">Records Table</a>
+          <span>/</span>
+          <span class="text-primary fw-semibold" id="formBreadcrumbAction">Add / Manage Form</span>
+        </div>
+
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+          <div>
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <h1 class="page-title mb-0" id="formHeaderTitle">Add / Manage Record</h1>
+              <span class="view-mode-pill create" id="formModeBadge"><i class="bi bi-plus-circle"></i> Create Mode</span>
+            </div>
+            <p class="page-subtitle mb-0" id="formHeaderSubtitle">Enter and manage record details with real-time financial recalculation.</p>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1" id="formAutofillBtn" type="button">
+              <i class="bi bi-magic"></i> Sample Autofill
+            </button>
+            <button class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1" id="formBackToTableBtn" type="button">
+              <i class="bi bi-arrow-left"></i> Return to Table
+            </button>
+          </div>
+        </div>
+
+        <form id="recordForm" novalidate>
+          <div class="row g-4">
+            <!-- Left Column: Form inputs -->
+            <div class="col-12 col-xl-8">
+              <!-- 1. Borrower & Account Details -->
+              <div class="panel-card mb-3">
+                <div class="form-section-header">
+                  <i class="bi bi-person-badge text-primary"></i> 1. Borrower &amp; Account Details
+                </div>
+                <div class="row g-3">
+                  <div class="col-12 col-md-4">
+                    <label class="form-label-custom">Record ID</label>
+                    <input type="text" class="form-control-custom" id="formRecordId" placeholder="REC-101" readonly />
+                    <div class="form-text small" style="font-size:.68rem;">Unique tracking identifier</div>
+                  </div>
+                  <div class="col-12 col-md-8">
+                    <label class="form-label-custom">Borrower / Client Full Name <span class="req">*</span></label>
+                    <input type="text" class="form-control-custom" id="formBorrower" placeholder="e.g. Austin Robertson" required />
+                    <div class="invalid-feedback">Please enter borrower name.</div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Contact Email Address <span class="req">*</span></label>
+                    <input type="email" class="form-control-custom" id="formEmail" placeholder="e.g. client@company.com" required />
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Wallet / Custody Address</label>
+                    <input type="text" class="form-control-custom" id="formWalletAddress" placeholder="e.g. 0x71C...a29B or bc1q..." />
+                  </div>
                 </div>
               </div>
-              <iframe id="ytPlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Extej Loan Demo Video" style="display:none;"></iframe>
+
+              <!-- 2. Financial Terms & Collateral -->
+              <div class="panel-card mb-3">
+                <div class="form-section-header">
+                  <i class="bi bi-bank text-primary"></i> 2. Financial Terms &amp; Collateral
+                </div>
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Product / Record Category <span class="req">*</span></label>
+                    <select class="form-select-custom" id="formType" required>
+                      <option value="Bitcoin-Backed Loan">Bitcoin-Backed Loan</option>
+                      <option value="Ethereum Smart Vault">Ethereum Smart Vault</option>
+                      <option value="Solana High-Yield Collateral">Solana High-Yield Collateral</option>
+                      <option value="Institutional Credit Line">Institutional Credit Line</option>
+                      <option value="Flash Liquidity Pool">Flash Liquidity Pool</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Currency <span class="req">*</span></label>
+                    <select class="form-select-custom" id="formCurrency" required>
+                      <option value="EUR">EUR (€) - Euro</option>
+                      <option value="USD">USD ($) - US Dollar</option>
+                      <option value="GBP">GBP (£) - British Pound</option>
+                      <option value="CHF">CHF (Fr) - Swiss Franc</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Principal Borrow Amount <span class="req">*</span></label>
+                    <input type="number" class="form-control-custom" id="formAmount" placeholder="5000" min="10" step="10" required />
+                    <div class="invalid-feedback">Enter a valid amount (minimum 10).</div>
+                  </div>
+                  <div class="col-12 col-md-3">
+                    <label class="form-label-custom">Collateral Asset <span class="req">*</span></label>
+                    <select class="form-select-custom" id="formCollateralAsset" required>
+                      <option value="BTC">BTC (Bitcoin)</option>
+                      <option value="ETH">ETH (Ethereum)</option>
+                      <option value="SOL">SOL (Solana)</option>
+                      <option value="USDT">USDT (Tether)</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-3">
+                    <label class="form-label-custom">Collateral Amount <span class="req">*</span></label>
+                    <input type="number" class="form-control-custom" id="formCollateralAmount" placeholder="0.4146" step="0.0001" min="0" required />
+                  </div>
+
+                  <!-- LTV Slider -->
+                  <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <label class="form-label-custom mb-0">Loan-To-Value (LTV Ratio %)</label>
+                      <span class="range-val-badge" id="formLtvBadge">50%</span>
+                    </div>
+                    <div class="range-slider-wrap">
+                      <input type="range" class="form-range" id="formLtvSlider" min="20" max="85" step="1" value="50" />
+                    </div>
+                    <div class="d-flex justify-content-between text-muted small" style="font-size:.68rem;">
+                      <span>20% (Conservative)</span>
+                      <span>50% (Standard 0% APR)</span>
+                      <span>80%+ (Margin Watch)</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label class="form-label-custom">Interest Rate</label>
+                    <input type="text" class="form-control-custom" id="formInterest" value="0%" placeholder="0%" />
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label-custom">Duration / Term</label>
+                    <select class="form-select-custom" id="formTerm">
+                      <option value="1 month">1 month</option>
+                      <option value="3 months" selected>3 months</option>
+                      <option value="6 months">6 months</option>
+                      <option value="12 months">12 months</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label-custom">Repayment Schedule</label>
+                    <select class="form-select-custom" id="formRepaymentType">
+                      <option value="Monthly Amortized">Monthly Amortized</option>
+                      <option value="Lump Sum at Maturity">Lump Sum at Maturity</option>
+                      <option value="Flexible Interest-Only">Flexible Interest-Only</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Risk & Lifecycle Management -->
+              <div class="panel-card mb-3">
+                <div class="form-section-header">
+                  <i class="bi bi-shield-check text-primary"></i> 3. Lifecycle &amp; Risk Rating
+                </div>
+                <div class="row g-3">
+                  <div class="col-12 col-md-4">
+                    <label class="form-label-custom">Record Status <span class="req">*</span></label>
+                    <select class="form-select-custom" id="formStatus" required>
+                      <option value="active">Active</option>
+                      <option value="pending">Pending Review</option>
+                      <option value="warning">Margin Warning</option>
+                      <option value="completed">Completed / Settled</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label-custom">Maturity Date <span class="req">*</span></label>
+                    <input type="date" class="form-control-custom" id="formMaturityDate" required />
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label-custom">Risk Classification</label>
+                    <select class="form-select-custom" id="formRiskRating">
+                      <option value="Low">Low (Overcollateralized)</option>
+                      <option value="Medium">Medium (Standard Volatility)</option>
+                      <option value="High">High (Margin Sensitive)</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label-custom">Notes &amp; Internal Audit Memo</label>
+                    <textarea class="form-control-custom" id="formNotes" rows="2" placeholder="Add specific terms, customer notes or custodian instructions..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form Controls -->
+              <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-primary d-inline-flex align-items-center gap-2 px-4 py-2" id="recordFormSubmitBtn" type="submit">
+                  <i class="bi bi-check2-circle fs-5"></i> <span id="submitBtnText">Save Record</span>
+                </button>
+                <button class="btn btn-outline-secondary px-3 py-2" id="recordFormResetBtn" type="button">
+                  <i class="bi bi-x-circle me-1"></i> Clear
+                </button>
+                <button class="btn btn-link text-decoration-none text-muted ms-auto" id="recordFormCancelBtn" type="button">
+                  Cancel &amp; Back to Table
+                </button>
+              </div>
             </div>
-            <p class="demo-desc">Unlock maximum earnings with carefully selected DeFi products sourced from various blockchain protocols, designed to deliver exceptional performance.</p>
-            <p class="demo-desc">This video will help you get familiar with how our system works and see an example of how to use it properly.</p>
-            <p class="demo-desc">Get your loan and let SmartVaults automatically manage crypto volatility.</p>
-            <p class="demo-quick">Quick Links:</p>
-            <a href="#" class="demo-link" id="zeroRiskQuickLink">0% interest at 50% LTV for 3 months</a>
-            <div class="mt-2"><a href="#" class="more-info-link">More Info &rarr;</a></div>
+
+            <!-- Right Column: Live Summary Preview Card -->
+            <div class="col-12 col-xl-4">
+              <div class="panel-card sticky-top" style="top:80px;z-index:10;">
+                <div class="panel-header-row mb-3">
+                  <span class="panel-header-title d-flex align-items-center gap-2">
+                    <i class="bi bi-calculator text-primary"></i> Live Record Preview
+                  </span>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle px-2" id="previewStatusBadge">Active</span>
+                </div>
+
+                <div class="detail-row">
+                  <span class="detail-label">Borrower</span>
+                  <span class="detail-value fw-semibold" id="prevBorrower">Austin Robertson</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Record Category</span>
+                  <span class="detail-value" id="prevType">Bitcoin-Backed Loan</span>
+                </div>
+                <hr class="detail-divider" />
+                <div class="detail-row">
+                  <span class="detail-label">Principal Amount</span>
+                  <span class="detail-value highlight fs-6" id="prevAmount">€5,000.00</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Collateral Locked</span>
+                  <span class="detail-value" id="prevCollateral">0.4146 BTC</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Loan-to-Value</span>
+                  <span class="detail-value" id="prevLtv">50%</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Interest Rate</span>
+                  <span class="detail-value text-success" id="prevInterest">0%</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Duration Term</span>
+                  <span class="detail-value" id="prevTerm">3 months</span>
+                </div>
+                <hr class="detail-divider" />
+                <div class="detail-row">
+                  <span class="detail-label">Est. Monthly Payment</span>
+                  <span class="detail-value fw-bold" id="prevMonthly">€1,666.67 / mo</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Total Due at Maturity</span>
+                  <span class="detail-value text-primary fw-bold" id="prevTotalDue">€5,000.00</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Maturity Date</span>
+                  <span class="detail-value text-muted" id="prevMaturity">2025-06-15</span>
+                </div>
+
+                <div class="p-3 mt-3 rounded" style="background:var(--page-bg);border:1px solid var(--card-border);">
+                  <div class="d-flex align-items-center gap-2 mb-1">
+                    <i class="bi bi-shield-check text-success"></i>
+                    <span class="fw-semibold small">Instant Persistence</span>
+                  </div>
+                  <p class="small text-muted mb-0" style="font-size:.72rem;">
+                    Saving this record stores it in localStorage and synchronizes with the Records Table.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════
+           VIEW 4: SETTINGS (CUSTOMIZATION, THEMES, SECURITY)
+      ══════════════════════════════════════════════════ -->
+      <div class="view-section" id="view-settings">
+        <div class="breadcrumb-nav">
+          <a href="#wallet"><i class="bi bi-house-door"></i> Home</a>
+          <span>/</span>
+          <span class="text-primary fw-semibold">Settings</span>
+        </div>
+
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+          <div>
+            <h1 class="page-title mb-1">Settings &amp; System Preferences</h1>
+            <p class="page-subtitle mb-0">Configure dashboard appearance, dark mode, security parameters, and notification alerts.</p>
+          </div>
+          <button class="btn btn-primary d-inline-flex align-items-center gap-2" id="saveAllSettingsBtn" type="button">
+            <i class="bi bi-check2"></i> Save Preferences
+          </button>
+        </div>
+
+        <div class="row g-4">
+          <!-- Left Column: Settings Cards -->
+          <div class="col-12 col-xl-8">
+            <!-- 1. Appearance & Theme -->
+            <div class="panel-card mb-3">
+              <div class="form-section-header">
+                <i class="bi bi-palette text-primary"></i> 1. Appearance &amp; Visual Theme
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-2 border-bottom" style="border-color:var(--divider)!important;">
+                <div>
+                  <div class="fw-semibold">Dark Theme Mode</div>
+                  <div class="text-muted small">Switch between sleek dark interface and crisp light fintech styling</div>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="settingsPageDarkToggle" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-2 border-bottom" style="border-color:var(--divider)!important;">
+                <div>
+                  <div class="fw-semibold">Compact Table Rows</div>
+                  <div class="text-muted small">Display higher density record table rows for faster scanning</div>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="compactTableToggle" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="mt-3">
+                <label class="form-label-custom mb-2">Accent Color Style</label>
+                <div class="theme-selector-grid">
+                  <div class="theme-card-option active" data-color="blue">
+                    <div class="theme-preview-circle" style="background:#2563eb;color:#fff;"><i class="bi bi-check"></i></div>
+                    <div class="small fw-semibold">Fintech Blue</div>
+                  </div>
+                  <div class="theme-card-option" data-color="emerald">
+                    <div class="theme-preview-circle" style="background:#059669;color:#fff;"></div>
+                    <div class="small fw-semibold">Emerald Green</div>
+                  </div>
+                  <div class="theme-card-option" data-color="purple">
+                    <div class="theme-preview-circle" style="background:#7c3aed;color:#fff;"></div>
+                    <div class="small fw-semibold">Indigo Violet</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Security & Authentication -->
+            <div class="panel-card mb-3">
+              <div class="form-section-header">
+                <i class="bi bi-shield-lock text-primary"></i> 2. Security &amp; Access Controls
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-2 border-bottom" style="border-color:var(--divider)!important;">
+                <div>
+                  <div class="fw-semibold">Two-Factor Authentication (2FA)</div>
+                  <div class="text-muted small">Require authenticator code for disbursements and edits</div>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="settingsTwoFaToggle" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-2 border-bottom" style="border-color:var(--divider)!important;">
+                <div>
+                  <div class="fw-semibold">Biometric WebAuthn / Passkey</div>
+                  <div class="text-muted small">Enable Windows Hello / Touch ID hardware authorization</div>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="biometricToggle" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="row g-3 mt-2">
+                <div class="col-12 col-md-6">
+                  <label class="form-label-custom">Auto-Lock Session Timeout</label>
+                  <select class="form-select-custom" id="sessionTimeoutSelect">
+                    <option value="15">15 Minutes of Inactivity</option>
+                    <option value="30" selected>30 Minutes of Inactivity</option>
+                    <option value="60">1 Hour</option>
+                    <option value="never">Never (Stay Logged In)</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label-custom">IP Allowlist Restriction</label>
+                  <input type="text" class="form-control-custom" placeholder="e.g. 192.168.1.1, 10.0.0.0/24" value="All Authorized IPs" />
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Financial & Currency Preferences -->
+            <div class="panel-card">
+              <div class="form-section-header">
+                <i class="bi bi-currency-dollar text-primary"></i> 3. Currency &amp; Loan Defaults
+              </div>
+              <div class="row g-3">
+                <div class="col-12 col-md-4">
+                  <label class="form-label-custom">Default Workspace Currency</label>
+                  <select class="form-select-custom" id="defaultCurrencySelect">
+                    <option value="EUR" selected>EUR (€) - Euro</option>
+                    <option value="USD">USD ($) - US Dollar</option>
+                    <option value="GBP">GBP (£) - British Pound</option>
+                    <option value="CHF">CHF (Fr) - Swiss Franc</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label-custom">Default Primary Collateral</label>
+                  <select class="form-select-custom">
+                    <option value="BTC" selected>BTC (Bitcoin Custody)</option>
+                    <option value="ETH">ETH (Ethereum SmartVault)</option>
+                    <option value="SOL">SOL (Solana Vault)</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label-custom">Max Permitted LTV Limit</label>
+                  <select class="form-select-custom">
+                    <option value="50">50% (Standard Safe)</option>
+                    <option value="65" selected>65% (Moderate Exposure)</option>
+                    <option value="80">80% (High Volatility)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Info & Action Cards -->
+          <div class="col-12 col-xl-4">
+            <div class="panel-card mb-3">
+              <div class="panel-header-title mb-2">Notification Channels</div>
+              <div class="d-flex align-items-center justify-content-between py-2 border-bottom" style="border-color:var(--divider)!important;">
+                <div>
+                  <div class="fw-semibold small">Email Notifications</div>
+                  <div class="text-muted" style="font-size:.7rem;">Receive statement &amp; loan alerts</div>
+                </div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-2 border-bottom" style="border-color:var(--divider)!important;">
+                <div>
+                  <div class="fw-semibold small">Margin Call SMS</div>
+                  <div class="text-muted" style="font-size:.7rem;">Instant SMS if LTV exceeds 70%</div>
+                </div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-2" style="border-color:var(--divider)!important;">
+                <div>
+                  <div class="fw-semibold small">In-App Sound Alerts</div>
+                  <div class="text-muted" style="font-size:.7rem;">Play chime on new alert</div>
+                </div>
+                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-header-title mb-2">System Diagnostics</div>
+              <div class="detail-row"><span class="detail-label">API Version</span><span class="detail-value">v2.4.0-stable</span></div>
+              <div class="detail-row"><span class="detail-label">Local Storage</span><span class="detail-value text-success">Healthy (Ready)</span></div>
+              <div class="detail-row"><span class="detail-label">Connected Node</span><span class="detail-value">Frankfurt (EU-Central)</span></div>
+              <div class="detail-row"><span class="detail-label">WebSocket Feed</span><span class="detail-value text-success">&#9679; Connected</span></div>
+              <button class="btn btn-sm btn-outline-danger w-100 mt-3" id="clearAppDataBtn" type="button">
+                <i class="bi bi-trash3 me-1"></i> Reset App Data to Defaults
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════
+           VIEW 5: PROFILE (USER PROFILE & ACCOUNT DETAILS)
+      ══════════════════════════════════════════════════ -->
+      <div class="view-section" id="view-profile">
+        <div class="breadcrumb-nav">
+          <a href="#wallet"><i class="bi bi-house-door"></i> Home</a>
+          <span>/</span>
+          <span class="text-primary fw-semibold">User Profile</span>
+        </div>
+
+        <!-- Profile Hero Banner -->
+        <div class="profile-hero">
+          <div class="profile-hero-left">
+            <img src="https://ui-avatars.com/api/?name=Austin+Robertson&background=2563EB&color=fff&size=80" alt="Avatar" class="profile-hero-avatar" id="profileHeroAvatar" />
+            <div>
+              <div class="d-flex align-items-center gap-2">
+                <h2 class="profile-hero-name mb-0" id="profileHeroName">Austin Robertson</h2>
+                <span class="badge bg-white text-primary rounded-pill px-2 py-1 small fw-bold"><i class="bi bi-patch-check-fill text-primary"></i> Tier 3 Verified</span>
+              </div>
+              <div class="profile-hero-role" id="profileHeroRole">Marketing Administrator &bull; Extej Custody</div>
+              <div class="small opacity-75 mt-1"><i class="bi bi-envelope me-1"></i> <span id="profileHeroEmail">austin.robertson@extej.io</span></div>
+            </div>
+          </div>
+          <div class="d-flex gap-2">
+            <span class="badge bg-white text-dark py-2 px-3 fw-semibold"><i class="bi bi-shield-check text-success me-1"></i> Identity Verified</span>
+          </div>
+        </div>
+
+        <!-- Profile Grid -->
+        <div class="row g-4">
+          <div class="col-12 col-xl-8">
+            <div class="panel-card mb-3">
+              <div class="form-section-header">
+                <i class="bi bi-person-lines-fill text-primary"></i> Personal &amp; Professional Information
+              </div>
+              <form id="profileForm">
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Full Name</label>
+                    <input type="text" class="form-control-custom" id="profileFormName" value="Austin Robertson" required />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Professional Job Title / Role</label>
+                    <input type="text" class="form-control-custom" id="profileFormRole" value="Marketing Administrator" required />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Primary Email</label>
+                    <input type="email" class="form-control-custom" id="profileFormEmail" value="austin.robertson@extej.io" required />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Phone Number</label>
+                    <input type="text" class="form-control-custom" id="profileFormPhone" value="+44 7911 123456" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Country / Region</label>
+                    <select class="form-select-custom" id="profileFormCountry">
+                      <option value="GB" selected>United Kingdom</option>
+                      <option value="US">United States</option>
+                      <option value="CH">Switzerland</option>
+                      <option value="DE">Germany</option>
+                      <option value="SG">Singapore</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label-custom">Custodian Wallet Address</label>
+                    <input type="text" class="form-control-custom" id="profileFormWallet" value="0x71C...a29B" />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label-custom">Bio / Profile Description</label>
+                    <textarea class="form-control-custom" id="profileFormBio" rows="3">Lead administrative operator for portfolio collateral and cryptocurrency smart vault loans at Extej Capital.</textarea>
+                  </div>
+                </div>
+                <div class="mt-4 d-flex align-items-center gap-3">
+                  <button class="btn btn-primary d-inline-flex align-items-center gap-2 px-4 py-2" id="saveProfileBtn" type="submit">
+                    <i class="bi bi-floppy"></i> Save Profile Changes
+                  </button>
+                  <span class="text-muted small" id="profileSaveNotice">Updates reflect immediately across the navbar and profile drawer.</span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-12 col-xl-4">
+            <div class="panel-card mb-3">
+              <div class="panel-header-title mb-3">Custody &amp; Operational Stats</div>
+              <div class="stat-card mb-2 p-3">
+                <div class="stat-info">
+                  <span class="stat-label">Active Loans Supervised</span>
+                  <span class="stat-number fs-4" id="profileLoansCount">5</span>
+                </div>
+                <div class="stat-icon-wrap blue" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-wallet2"></i></div>
+              </div>
+              <div class="stat-card mb-2 p-3">
+                <div class="stat-info">
+                  <span class="stat-label">Collateral Supervised</span>
+                  <span class="stat-number fs-4">2.25 BTC</span>
+                </div>
+                <div class="stat-icon-wrap amber" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-shield-check"></i></div>
+              </div>
+              <div class="stat-card p-3">
+                <div class="stat-info">
+                  <span class="stat-label">Verification Level</span>
+                  <span class="stat-number fs-4 text-success">Level 3</span>
+                </div>
+                <div class="stat-icon-wrap emerald" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-award"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════
+           VIEW 6: NOTIFICATIONS (LIVE FEED & ALERTS CENTER)
+      ══════════════════════════════════════════════════ -->
+      <div class="view-section" id="view-notifications">
+        <div class="breadcrumb-nav">
+          <a href="#wallet"><i class="bi bi-house-door"></i> Home</a>
+          <span>/</span>
+          <span class="text-primary fw-semibold">Notifications</span>
+        </div>
+
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+          <div>
+            <h1 class="page-title mb-1">Notifications Center</h1>
+            <p class="page-subtitle mb-0">Live feed of loan approvals, collateral margin calls, safety alerts, and account activity.</p>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1" id="pageMarkAllReadBtn" type="button">
+              <i class="bi bi-check2-all"></i> Mark All as Read
+            </button>
+            <button class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1" id="simulateNotifBtn" type="button">
+              <i class="bi bi-bell-plus"></i> Simulate New Alert
+            </button>
+            <button class="btn btn-outline-secondary btn-sm" id="clearAllNotifsBtn" type="button">
+              <i class="bi bi-trash"></i> Clear All
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-card p-0 overflow-hidden">
+          <!-- Filter Tabs -->
+          <div class="d-flex border-bottom px-3 pt-2 gap-2" style="border-color:var(--divider)!important;background:var(--page-bg);">
+            <button class="settings-pill-btn active py-2" data-notif-filter="all" id="notifTabAll" type="button">
+              All Notifications <span class="badge bg-secondary-subtle text-secondary ms-1" id="notifBadgeAll">4</span>
+            </button>
+            <button class="settings-pill-btn py-2" data-notif-filter="unread" id="notifTabUnread" type="button">
+              Unread <span class="badge bg-primary-subtle text-primary ms-1" id="notifBadgeUnread">2</span>
+            </button>
+            <button class="settings-pill-btn py-2" data-notif-filter="loan" id="notifTabLoans" type="button">
+              Loans &amp; Margin
+            </button>
+            <button class="settings-pill-btn py-2" data-notif-filter="security" id="notifTabSecurity" type="button">
+              Security
+            </button>
+          </div>
+
+          <!-- Notification Items List -->
+          <div id="fullNotifList">
+            <!-- Dynamically populated -->
           </div>
         </div>
       </div>
@@ -335,7 +1079,22 @@
   </div>
 </div>
 
+<!-- Modal: Delete Record Confirmation -->
+<div class="modal-overlay" id="deleteRecordModal" role="dialog" aria-modal="true">
+  <div class="modal-box" style="max-width:420px;">
+    <button class="modal-close" id="deleteModalClose" type="button"><i class="bi bi-x-lg"></i></button>
+    <div class="modal-icon warning" style="color:var(--danger);background:var(--danger-bg);"><i class="bi bi-trash3"></i></div>
+    <h2 class="modal-title">Delete Record?</h2>
+    <p class="modal-subtitle" id="deleteModalDesc">Are you sure you want to delete this record? This action cannot be undone.</p>
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button class="modal-btn-primary" id="confirmDeleteRecordBtn" style="background:var(--danger);border-color:var(--danger);" type="button">Delete Record</button>
+      <button class="modal-btn-secondary" id="cancelDeleteRecordBtn" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="services/records.js"></script>
 <script src="services/loans.js"></script>
 <script src="services/wallet.js"></script>
 <script src="services/notifications.js"></script>
